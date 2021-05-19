@@ -1,38 +1,33 @@
-"sync vim-plug
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" Check OS
+if !exists('g:os')
+  if has('mac')
+    let g:os = 'mac'
+  elseif has('unix')
+    let g:os = 'linux'
+  else
+    let g:os = 'unknown'
+  endif
 endif
 
-"deploy vim-plug
+if g:os == 'mac'
+
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+" Deploy vim-plug
 call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'preservim/nerdtree'
   Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
-
-"config
-set nocompatible
-syntax on
-set backspace=indent,eol,start
-set number
-set hls
-set mouse=a
-set listchars=trail:.,tab:>-,space:.
-set list
-highlight TabSpace ctermfg=DarkGrey
-match TabSpace /\t\| /
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set smarttab
-set ruler
-set tags=tags
-set tags+=./tags
-set tags+=~/code/linux-5.10/tags
-set laststatus=2
-set noshowmode
 
 "NERDTree
 let mapleader = ","
@@ -57,3 +52,31 @@ let g:ctrlp_user_command = {
 		\ },
 	\ 'fallback': 'find %s -type f'
 	\ }
+
+endif
+
+" Config
+set nocompatible
+syntax on
+set backspace=indent,eol,start
+set number
+set hls
+set mouse=a
+set listchars=trail:.,tab:>-,space:.
+set list
+highlight TabSpace ctermfg=DarkGrey
+match TabSpace /\t\| /
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set smarttab
+set ruler
+set tags=tags
+set tags+=./tags
+set tags+=~/code/linux-5.10/tags
+set laststatus=2
+set noshowmode
+
+if g:os == 'mac'
+  set tags+=/Users/ownia/codespace/linux/tags
+endif
