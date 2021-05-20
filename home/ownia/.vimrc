@@ -4,6 +4,11 @@ if !exists('g:os')
     let g:os = 'mac'
   elseif has('unix')
     let g:os = 'linux'
+    if system("lsb_release -i | awk '{print $3}'") == 'Ubuntu'
+      let g:ubuntu = system("lsb_release -r | awk '{print $2}'")
+    else
+      let g:ubuntu = '0'
+    endif
   else
     let g:os = 'unknown'
   endif
