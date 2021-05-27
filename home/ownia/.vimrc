@@ -4,17 +4,15 @@ if !exists('g:os')
     let g:os = 'mac'
   elseif has('unix')
     let g:os = 'linux'
-    if system("lsb_release -i | awk '{print $3}'") == 'Ubuntu'
-      let g:ubuntu = system("lsb_release -r | awk '{print $2}'")
-    else
-      let g:ubuntu = '0'
+    if !exists('g:version')
+      let g:version = system("uname -r | awk '{print substr($1,1,1)}'")
     endif
   else
     let g:os = 'unknown'
   endif
 endif
 
-if g:os == 'mac'
+if g:os == 'mac' || g:version > '4'
 
 " Install vim-plug if not found
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -34,11 +32,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
-"NERDTree
+" NERDTree
 let mapleader = ","
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
-"ctrlp
+" ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
