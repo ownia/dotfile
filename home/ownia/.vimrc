@@ -12,6 +12,12 @@ if !exists('g:os')
   endif
 endif
 
+
+if g:os == 'mac'
+  set langmenu=en_US
+  let $LANG = 'en_US'
+endif
+
 if g:os == 'mac' || g:version > '4'
 
 " Install vim-plug if not found
@@ -29,35 +35,13 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'preservim/nerdtree'
-  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'vim-scripts/taglist.vim'
-  Plug 'vim-scripts/gtags.vim'
-  Plug 'joereynolds/gtags-scope'
+  Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 call plug#end()
 
 " NERDTree
 let mapleader = ","
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
-
-" ctrlp
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-	\ 'file': '\v\.(exe|so|dll)$',
-	\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-	\ }
-let g:ctrlp_user_command = 'find %s -type f'
-let g:ctrlp_user_command = {
-	\ 'types': {
-		\ 1: ['.git', 'cd %s && git ls-files'],
-		\ 2: ['.hg', 'hg --cwd %s locate -I .'],
-		\ },
-	\ 'fallback': 'find %s -type f'
-	\ }
 
 " Tlist
 let Tlist_Auto_Highlight_Tag=1
@@ -69,10 +53,8 @@ let Tlist_WinWidth=50
 "" let Tlist_Sort_Type='name'
 nnoremap <silent> <F2> :TlistOpen<CR>
 
-" gtags
-""let g:GtagsCscope_Quiet = 1
-set csprg=gtags-cscope
-cs add GTAGS
+" LeaderF
+let g:Lf_GtagsAutoGenerate = 1
 
 endif
 
@@ -95,9 +77,3 @@ set ruler
 set tags=./.tags;,.tags
 set laststatus=2
 set noshowmode
-
-if g:os == 'mac'
-  set tags+=/Users/ownia/codespace/linux/tags
-  set langmenu=en_US
-  let $LANG = 'en_US'
-endif
