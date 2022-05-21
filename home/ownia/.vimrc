@@ -30,6 +30,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'preservim/nerdtree'
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'vim-scripts/taglist.vim'
+  Plug 'vim-scripts/gtags.vim'
+  Plug 'joereynolds/gtags-scope'
 call plug#end()
 
 " NERDTree
@@ -56,6 +59,21 @@ let g:ctrlp_user_command = {
 	\ 'fallback': 'find %s -type f'
 	\ }
 
+" Tlist
+let Tlist_Auto_Highlight_Tag=1
+let Tlist_Auto_Open=1
+let Tlist_Auto_Update=1
+let Tlist_Use_Right_Window=1
+let Tlist_Exit_OnlyWindow=1
+let Tlist_WinWidth=50
+"" let Tlist_Sort_Type='name'
+nnoremap <silent> <F2> :TlistOpen<CR>
+
+" gtags
+""let g:GtagsCscope_Quiet = 1
+set csprg=gtags-cscope
+cs add GTAGS
+
 endif
 
 " Config
@@ -69,17 +87,17 @@ set listchars=trail:.,tab:>-,space:.
 set list
 highlight TabSpace ctermfg=DarkGrey
 match TabSpace /\t\| /
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=8
+set softtabstop=8
+set shiftwidth=8
 set smarttab
 set ruler
-set tags=tags
-set tags+=./tags
-set tags+=~/code/linux-5.10/tags
+set tags=./.tags;,.tags
 set laststatus=2
 set noshowmode
 
 if g:os == 'mac'
   set tags+=/Users/ownia/codespace/linux/tags
+  set langmenu=en_US
+  let $LANG = 'en_US'
 endif
