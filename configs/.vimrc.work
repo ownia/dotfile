@@ -26,9 +26,7 @@ set softtabstop=8
 set shiftwidth=8
 set smarttab
 set ruler
-set tags=tags
-set tags+=./tags
-set tags+=~/code/linux-5.10/tags
+set tags=./.tags;,.tags
 set laststatus=2
 set noshowmode
 set cursorline

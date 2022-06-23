@@ -12,7 +12,6 @@ if !exists('g:os')
   endif
 endif
 
-
 if g:os == 'mac'
   set langmenu=en_US
   let $LANG = 'en_US'
