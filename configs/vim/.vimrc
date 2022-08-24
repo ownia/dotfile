@@ -1,4 +1,4 @@
-" Check OS
+"" Check OS
 if !exists('g:os')
   if has('mac')
     let g:os = 'mac'
@@ -11,6 +11,7 @@ if !exists('g:os')
     let g:os = 'unknown'
   endif
 endif
+
 
 if g:os == 'mac'
   set langmenu=en_US
@@ -34,7 +35,8 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'preservim/nerdtree'
-  Plug 'vim-scripts/taglist.vim'
+  "Plug 'vim-scripts/taglist.vim'
+  Plug 'preservim/tagbar'
   Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 call plug#end()
 
@@ -51,6 +53,11 @@ let Tlist_Exit_OnlyWindow=1
 let Tlist_WinWidth=50
 "" let Tlist_Sort_Type='name'
 nnoremap <silent> <F2> :TlistOpen<CR>
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+autocmd VimEnter * nested :call tagbar#autoopen(1)
+let g:tagbar_sort = 0
 
 " LeaderF
 let g:Lf_GtagsAutoGenerate = 1
