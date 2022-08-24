@@ -3,8 +3,8 @@ From: ownia <o451686892@gmail.com>
 Date: Wed, 24 Aug 2022 22:30:42 +0800
 Subject: [PATCH] Add ardour macos support
 
-[git url]: https://github.com/Ardour/ardour.git
-[branch]: master
+[Git url]: https://github.com/Ardour/ardour.git
+[Branch]: master
 [HEAD commit id]: fa8f75c14509e3e52bc366dde622d24bd74d3bfe
 [Platform]: macOS
 

@@ -3,8 +3,8 @@ From: ownia <o451686892@gmail.com>
 Date: Wed, 24 Aug 2022 22:34:27 +0800
 Subject: [PATCH] Add arm support for bpftrace
 
-[git url]: https://github.com/iovisor/bpftrace.git
-[branch]: master
+[Git url]: https://github.com/iovisor/bpftrace.git
+[Branch]: master
 [HEAD commit id]: 14bd1ef58ad05fadf4de72a3ab15d2d25841e5cb
 [Platform]: linux
 
