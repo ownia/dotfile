@@ -1,0 +1,164 @@
+From 7128d7548733fe745e3786b85a6b06b8d8e49244 Mon Sep 17 00:00:00 2001
+From: ownia <o451686892@gmail.com>
+Date: Wed, 24 Aug 2022 22:30:42 +0800
+Subject: [PATCH] Add ardour macos support
+
+[git url]: https://github.com/Ardour/ardour.git
+[branch]: master
+[HEAD commit id]: fa8f75c14509e3e52bc366dde622d24bd74d3bfe
+[Platform]: macOS
+
+Signed-off-by: ownia <o451686892@gmail.com>
+---
+ libs/ardour/wscript             | 2 +-
+ libs/audiographer/wscript       | 2 +-
+ libs/canvas/wscript             | 2 +-
+ libs/midi++2/wscript            | 2 +-
+ libs/pbd/wscript                | 2 +-
+ libs/surfaces/maschine2/wscript | 4 ++--
+ libs/surfaces/push2/wscript     | 4 ++--
+ libs/waveview/wscript           | 2 +-
+ libs/widgets/wscript            | 2 +-
+ wscript                         | 4 ++--
+ 10 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/libs/ardour/wscript b/libs/ardour/wscript
+index 4a795327d6..728a248607 100644
+--- a/libs/ardour/wscript
++++ b/libs/ardour/wscript
+@@ -315,7 +315,7 @@ def configure(conf):
+                           atleast_version='0.3.2')
+     autowaf.check_pkg(conf, 'samplerate', uselib_store='SAMPLERATE',
+                       atleast_version='0.1.0')
+-    autowaf.check_pkg(conf, 'sigc++-2.0', uselib_store='SIGCPP',
++    autowaf.check_pkg(conf, 'sigc++-3.0', uselib_store='SIGCPP',
+                       atleast_version='2.0')
+ 
+     autowaf.check_pkg(conf, 'lv2', uselib_store='LV2',
+diff --git a/libs/audiographer/wscript b/libs/audiographer/wscript
+index bc6160bf6d..9c1cd26be5 100644
+--- a/libs/audiographer/wscript
++++ b/libs/audiographer/wscript
+@@ -28,7 +28,7 @@ def options(opt):
+ def configure(conf):
+ 
+     autowaf.check_pkg(conf, 'cppunit', uselib_store='CPPUNIT', atleast_version='1.12.0', mandatory=False)
+-    autowaf.check_pkg(conf, 'sigc++-2.0', uselib_store='SIGCPP', atleast_version='2.0', mandatory=False)
++    autowaf.check_pkg(conf, 'sigc++-3.0', uselib_store='SIGCPP', atleast_version='2.0', mandatory=False)
+     autowaf.check_pkg(conf, 'glib-2.0', uselib_store='GLIB', atleast_version='2.2', mandatory=False)
+     autowaf.check_pkg(conf, 'glibmm-2.4', uselib_store='GLIBMM', atleast_version='2.14.0', mandatory=False)
+     autowaf.check_pkg(conf, 'gthread-2.0', uselib_store='GTHREAD', atleast_version='2.14.0', mandatory=False)
+diff --git a/libs/canvas/wscript b/libs/canvas/wscript
+index 300b2e9281..98b3102d73 100644
+--- a/libs/canvas/wscript
++++ b/libs/canvas/wscript
+@@ -71,7 +71,7 @@ def options(opt):
+     autowaf.set_options(opt)
+ 
+ def configure(conf):
+-    autowaf.check_pkg(conf, 'cairomm-1.0', uselib_store='CAIROMM', atleast_version='1.8.4')
++    autowaf.check_pkg(conf, 'cairomm-1.16', uselib_store='CAIROMM', atleast_version='1.8.4')
+ 
+ def build(bld):
+     # Library
+diff --git a/libs/midi++2/wscript b/libs/midi++2/wscript
+index cc49cf0335..56c886ee41 100644
+--- a/libs/midi++2/wscript
++++ b/libs/midi++2/wscript
+@@ -45,7 +45,7 @@ def options(opt):
+ def configure(conf):
+     autowaf.check_pkg(conf, 'cppunit', uselib_store='CPPUNIT', atleast_version='1.12.0', mandatory=False)
+     autowaf.check_pkg(conf, 'libxml-2.0', uselib_store='XML')
+-    autowaf.check_pkg(conf, 'sigc++-2.0', uselib_store='SIGCPP', atleast_version='2.0')
++    autowaf.check_pkg(conf, 'sigc++-3.0', uselib_store='SIGCPP', atleast_version='2.0')
+ 
+     # Boost headers
+     autowaf.check_header(conf, 'cxx', 'boost/shared_ptr.hpp')
+diff --git a/libs/pbd/wscript b/libs/pbd/wscript
+index 82960539a2..2892f90dcb 100644
+--- a/libs/pbd/wscript
++++ b/libs/pbd/wscript
+@@ -104,7 +104,7 @@ def options(opt):
+ 
+ def configure(conf):
+     autowaf.check_pkg(conf, 'libxml-2.0', uselib_store='XML')
+-    autowaf.check_pkg(conf, 'sigc++-2.0', uselib_store='SIGCPP', atleast_version='2.0')
++    autowaf.check_pkg(conf, 'sigc++-3.0', uselib_store='SIGCPP', atleast_version='2.0')
+     autowaf.check_pkg(conf, 'libcurl', uselib_store='CURL', atleast_version='7.0.0', mandatory=True)
+     autowaf.check_pkg(conf, 'libarchive', uselib_store='ARCHIVE', atleast_version='3.0.0', mandatory=True)
+     autowaf.check_pkg(conf, 'glibmm-2.4', uselib_store='GLIBMM', atleast_version='2.32.0', mandatory=True)
+diff --git a/libs/surfaces/maschine2/wscript b/libs/surfaces/maschine2/wscript
+index 40e8ecbc9a..aebfe233fc 100644
+--- a/libs/surfaces/maschine2/wscript
++++ b/libs/surfaces/maschine2/wscript
+@@ -10,8 +10,8 @@ def options(opt):
+     autowaf.set_options(opt)
+ 
+ def configure(conf):
+-    autowaf.check_pkg(conf, 'pangomm-1.4', uselib_store='PANGOMM', atleast_version='1.4', mandatory=True)
+-    autowaf.check_pkg(conf, 'cairomm-1.0', uselib_store='CAIROMM', atleast_version='1.8.4', mandatory=True)
++    autowaf.check_pkg(conf, 'pangomm-2.48', uselib_store='PANGOMM', atleast_version='1.4', mandatory=True)
++    autowaf.check_pkg(conf, 'cairomm-1.16', uselib_store='CAIROMM', atleast_version='1.8.4', mandatory=True)
+ 
+ def build(bld):
+     obj = bld(features = 'cxx cxxshlib')
+diff --git a/libs/surfaces/push2/wscript b/libs/surfaces/push2/wscript
+index 1ba7ed53ca..f8efdda376 100644
+--- a/libs/surfaces/push2/wscript
++++ b/libs/surfaces/push2/wscript
+@@ -10,8 +10,8 @@ def options(opt):
+     autowaf.set_options(opt)
+ 
+ def configure(conf):
+-    autowaf.check_pkg(conf, 'pangomm-1.4', uselib_store='PANGOMM', atleast_version='1.4', mandatory=True)
+-    autowaf.check_pkg(conf, 'cairomm-1.0', uselib_store='CAIROMM', atleast_version='1.8.4', mandatory=True)
++    autowaf.check_pkg(conf, 'pangomm-2.48', uselib_store='PANGOMM', atleast_version='1.4', mandatory=True)
++    autowaf.check_pkg(conf, 'cairomm-1.16', uselib_store='CAIROMM', atleast_version='1.8.4', mandatory=True)
+ 
+ def build(bld):
+     obj = bld(features = 'cxx cxxshlib')
+diff --git a/libs/waveview/wscript b/libs/waveview/wscript
+index f3d28404f5..caa775ca1d 100644
+--- a/libs/waveview/wscript
++++ b/libs/waveview/wscript
+@@ -35,7 +35,7 @@ def options(opt):
+     autowaf.set_options(opt)
+ 
+ def configure(conf):
+-    autowaf.check_pkg(conf, 'cairomm-1.0', uselib_store='CAIROMM', atleast_version='1.8.4')
++    autowaf.check_pkg(conf, 'cairomm-1.16', uselib_store='CAIROMM', atleast_version='1.8.4')
+ 
+ def build(bld):
+     # Library
+diff --git a/libs/widgets/wscript b/libs/widgets/wscript
+index 5dd046efb8..45019d5a21 100644
+--- a/libs/widgets/wscript
++++ b/libs/widgets/wscript
+@@ -59,7 +59,7 @@ def options(opt):
+     autowaf.set_options(opt)
+ 
+ def configure(conf):
+-    autowaf.check_pkg(conf, 'cairomm-1.0', uselib_store='CAIROMM', atleast_version='1.8.4')
++    autowaf.check_pkg(conf, 'cairomm-1.16', uselib_store='CAIROMM', atleast_version='1.8.4')
+ 
+ def build(bld):
+     # Library
+diff --git a/wscript b/wscript
+index 8e60050b19..c5db3980a8 100644
+--- a/wscript
++++ b/wscript
+@@ -1172,9 +1172,9 @@ def configure(conf):
+     autowaf.check_pkg(conf, 'glib-2.0', uselib_store='GLIB', atleast_version='2.28', mandatory=True)
+     autowaf.check_pkg(conf, 'glib-2.0', uselib_store='GLIB_2_64', atleast_version='2.64', mandatory=False)
+     autowaf.check_pkg(conf, 'gthread-2.0', uselib_store='GTHREAD', atleast_version='2.2', mandatory=True)
+-    autowaf.check_pkg(conf, 'glibmm-2.4', uselib_store='GLIBMM', atleast_version='2.32.0', mandatory=True)
++    autowaf.check_pkg(conf, 'glibmm-2.68', uselib_store='GLIBMM', atleast_version='2.32.0', mandatory=True)
+     autowaf.check_pkg(conf, 'sndfile', uselib_store='SNDFILE', atleast_version='1.0.18', mandatory=True)
+-    autowaf.check_pkg(conf, 'giomm-2.4', uselib_store='GIOMM', atleast_version='2.2', mandatory=True)
++    autowaf.check_pkg(conf, 'giomm-2.68', uselib_store='GIOMM', atleast_version='2.2', mandatory=True)
+     autowaf.check_pkg(conf, 'libcurl', uselib_store='CURL', atleast_version='7.0.0', mandatory=True)
+     autowaf.check_pkg(conf, 'libarchive', uselib_store='ARCHIVE', atleast_version='3.0.0', mandatory=True)
+     autowaf.check_pkg(conf, 'liblo', uselib_store='LO', atleast_version='0.26', mandatory=True)
+-- 
+2.37.2
+
