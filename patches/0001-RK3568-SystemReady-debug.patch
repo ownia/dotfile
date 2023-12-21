@@ -1,0 +1,209 @@
+From 8ae8bae2e5cb09e4279e95f216080ae9dfc67b1f Mon Sep 17 00:00:00 2001
+From: Weizhao Ouyang <weizhao.ouyang@arm.com>
+Date: Thu, 21 Dec 2023 13:01:32 +0800
+Subject: [PATCH] RK3568 SystemReady debug
+
+[Git url]: https://github.com/rockchip-toybrick/u-boot.git
+[Branch]: next-dev
+[HEAD commit id]: c350076109ed9c4b788825e77663fe068fc16f88
+[Platform]: linux
+
+Signed-off-by: Weizhao Ouyang <weizhao.ouyang@arm.com>
+---
+ cmd/fdt.c                       |  1 +
+ cmd/pxe.c                       |  1 +
+ common/Kconfig                  |  2 +-
+ common/image-fdt.c              |  1 +
+ configs/rk3568_defconfig        | 11 ++++++-----
+ disk/part_dos.c                 |  2 +-
+ disk/part_efi.c                 |  6 +++++-
+ drivers/ram/ramdisk_ro.c        |  4 ++--
+ include/config_distro_bootcmd.h |  3 +++
+ 9 files changed, 21 insertions(+), 10 deletions(-)
+
+diff --git a/cmd/fdt.c b/cmd/fdt.c
+index 0a1e725711..772bcc0c92 100644
+--- a/cmd/fdt.c
++++ b/cmd/fdt.c
+@@ -41,6 +41,7 @@ void set_working_fdt_addr(ulong addr)
+ {
+ 	void *buf;
+ 
++	printf("Working FDT set to %lx\n", addr);
+ 	buf = map_sysmem(addr, 0);
+ 	working_fdt = buf;
+ 	env_set_hex("fdtaddr", addr);
+diff --git a/cmd/pxe.c b/cmd/pxe.c
+index a086585de3..71a4b0e6e6 100644
+--- a/cmd/pxe.c
++++ b/cmd/pxe.c
+@@ -1700,6 +1700,7 @@ static int do_sysboot(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+ 	}
+ 
+ 	if (strstr(filename, "extlinux.conf") != NULL && toybrick_get_flag(tflag, &index)== 0) {
++		printf("ownia %s %s %d\n", filename, tflag, index);
+ 		if (index == -1)
+ 			sprintf(toybrick_conf, "%s.%s", filename, tflag);
+ 		else
+diff --git a/common/Kconfig b/common/Kconfig
+index 607b2dfdcc..fe7c7b126b 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -273,7 +273,7 @@ config IDENT_STRING
+ 
+ config LOGLEVEL
+ 	int "loglevel"
+-	default 4
++	default 8
+ 	range 0 8
+ 	help
+ 	  All Messages with a loglevel smaller than the console loglevel will
+diff --git a/common/image-fdt.c b/common/image-fdt.c
+index 2c79b960aa..d6be2d946a 100644
+--- a/common/image-fdt.c
++++ b/common/image-fdt.c
+@@ -241,6 +241,7 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+ 
+ 	/* If fdt_high is set use it to select the relocation address */
+ 	fdt_high = env_get("fdt_high");
++	printf("fdt_high %s\n", fdt_high);
+ 	if (fdt_high) {
+ 		void *desired_addr = (void *)simple_strtoul(fdt_high, NULL, 16);
+ 
+diff --git a/configs/rk3568_defconfig b/configs/rk3568_defconfig
+index 23f141e1ce..37a8599748 100644
+--- a/configs/rk3568_defconfig
++++ b/configs/rk3568_defconfig
+@@ -79,7 +79,6 @@ CONFIG_CMD_TFTP_FLASH=y
+ # CONFIG_CMD_CHARGE_DISPLAY is not set
+ CONFIG_CMD_MTD_BLK=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+-# CONFIG_ISO_PARTITION is not set
+ CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+@@ -157,8 +156,6 @@ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_RAM=y
+ CONFIG_SPL_RAM=y
+ CONFIG_TPL_RAM=y
+-CONFIG_DM_RAMDISK=y
+-CONFIG_RAMDISK_RO=y
+ CONFIG_ROCKCHIP_SDRAM_COMMON=y
+ CONFIG_ROCKCHIP_TPL_INIT_DRAM_TYPE=0
+ CONFIG_DM_RESET=y
+@@ -198,7 +195,6 @@ CONFIG_DRM_ROCKCHIP_LVDS=y
+ CONFIG_DRM_ROCKCHIP_RGB=y
+ CONFIG_ROCKCHIP_CUBIC_LUT_SIZE=9
+ CONFIG_LCD=y
+-CONFIG_USE_TINY_PRINTF=y
+ CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_RSA=y
+ CONFIG_SPL_RSA=y
+@@ -210,7 +206,8 @@ CONFIG_LZ4=y
+ CONFIG_LZMA=y
+ CONFIG_SPL_GZIP=y
+ CONFIG_ERRNO_STR=y
+-# CONFIG_EFI_LOADER is not set
++CONFIG_CMD_BOOTEFI=y
++CONFIG_EFI_LOADER=y
+ CONFIG_AVB_LIBAVB=y
+ CONFIG_AVB_LIBAVB_AB=y
+ CONFIG_AVB_LIBAVB_ATX=y
+@@ -219,3 +216,7 @@ CONFIG_RK_AVB_LIBAVB_USER=y
+ CONFIG_OPTEE_CLIENT=y
+ CONFIG_OPTEE_V2=y
+ CONFIG_OPTEE_ALWAYS_USE_SECURITY_PARTITION=y
++CONFIG_LOG=y
++CONFIG_LOG_MAX_LEVEL=8
++CONFIG_ISO_PARTITION=y
++CONFIG_SPL_FIT_IMAGE_KB=4096
+diff --git a/disk/part_dos.c b/disk/part_dos.c
+index 850a538e83..1a36be0446 100644
+--- a/disk/part_dos.c
++++ b/disk/part_dos.c
+@@ -44,7 +44,7 @@ static inline int is_extended(int part_type)
+ 
+ static inline int is_bootable(dos_partition_t *p)
+ {
+-	return p->boot_ind == 0x80;
++	return (p->sys_ind == 0xef) || (p->boot_ind == 0x80);
+ }
+ 
+ static void print_one_part(dos_partition_t *p, lbaint_t ext_part_sector,
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index 27f3e4dda3..227fe88803 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -1132,11 +1132,13 @@ static int is_gpt_valid(struct blk_desc *dev_desc, u64 lba,
+ 	ALLOC_CACHE_ALIGN_BUFFER(legacy_mbr, mbr, dev_desc->blksz);
+ 
+ 	/* Read MBR Header from device */
++	printf("read MBR header\n");
+ 	if (blk_dread(dev_desc, 0, 1, (ulong *)mbr) != 1) {
+ 		printf("*** ERROR: Can't read MBR header ***\n");
+ 		return 0;
+ 	}
+ 
++	printf("read GPT header\n");
+ 	/* Read GPT Header from device */
+ 	if (blk_dread(dev_desc, (lbaint_t)lba, 1, pgpt_head) != 1) {
+ 		printf("*** ERROR: Can't read GPT header ***\n");
+@@ -1148,6 +1150,7 @@ static int is_gpt_valid(struct blk_desc *dev_desc, u64 lba,
+ 
+ 	if (dev_desc->sig_type == SIG_TYPE_NONE) {
+ 		efi_guid_t empty = {};
++		printf("disk_guid\n");
+ 		if (memcmp(&pgpt_head->disk_guid, &empty, sizeof(empty))) {
+ 			dev_desc->sig_type = SIG_TYPE_GUID;
+ 			memcpy(&dev_desc->guid_sig, &pgpt_head->disk_guid,
+@@ -1159,6 +1162,7 @@ static int is_gpt_valid(struct blk_desc *dev_desc, u64 lba,
+ 	}
+ 
+ 	/* Read and allocate Partition Table Entries */
++	printf("read PTE\n");
+ 	*pgpt_pte = alloc_read_gpt_entries(dev_desc, pgpt_head);
+ 	if (*pgpt_pte == NULL) {
+ 		printf("GPT: Failed to allocate memory for PTE\n");
+@@ -1199,7 +1203,7 @@ static gpt_entry *alloc_read_gpt_entries(struct blk_desc *dev_desc,
+ 	count = le32_to_cpu(pgpt_head->num_partition_entries) *
+ 		le32_to_cpu(pgpt_head->sizeof_partition_entry);
+ 
+-	debug("%s: count = %u * %u = %lu\n", __func__,
++	printf("%s: count = %u * %u = %lu\n", __func__,
+ 	      (u32) le32_to_cpu(pgpt_head->num_partition_entries),
+ 	      (u32) le32_to_cpu(pgpt_head->sizeof_partition_entry),
+ 	      (ulong)count);
+diff --git a/drivers/ram/ramdisk_ro.c b/drivers/ram/ramdisk_ro.c
+index c1179edacb..7a656485cf 100644
+--- a/drivers/ram/ramdisk_ro.c
++++ b/drivers/ram/ramdisk_ro.c
+@@ -24,9 +24,9 @@ static ulong ramdisk_ro_bread(struct blk_desc *desc, lbaint_t start,
+ 	if ((ulong)dst != (ulong)b_start)
+ 		memcpy((char *)dst, (char *)b_start, b_size);
+ 	else
+-		debug("%s: skip memcpy at: 0x%08lx\n", __func__, (ulong)b_start);
++		printf("%s: skip memcpy at: 0x%08lx\n", __func__, (ulong)b_start);
+ 
+-	debug("%s: b_start=0x%lx, b_size=0x%lx. dst=%p\n",
++	printf("%s: b_start=0x%lx, b_size=0x%lx. dst=%p\n",
+ 	      __func__, b_start, b_size, dst);
+ 
+ 	return blkcnt;
+diff --git a/include/config_distro_bootcmd.h b/include/config_distro_bootcmd.h
+index 9ed6b9892c..a2dfb18b26 100644
+--- a/include/config_distro_bootcmd.h
++++ b/include/config_distro_bootcmd.h
+@@ -374,7 +374,10 @@
+ 			"if fstype ${devtype} "                           \
+ 					"${devnum}:${distro_bootpart} "   \
+ 					"bootfstype; then "               \
++				"echo bootfstype done; "                  \
+ 				"run scan_dev_for_boot; "                 \
++			"else "                                           \
++				"echo fs ${devtype} ${devnum} ${distro_bootpart};" \
+ 			"fi; "                                            \
+ 		"done\0"                                                  \
+ 	\
+-- 
+2.25.1
+
