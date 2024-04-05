@@ -4,6 +4,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/ownia/.oh-my-zsh"
 
+ZSH_DISABLE_COMPFIX=true
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -97,5 +99,19 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH=/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/ownia/.cargo/bin
-alias ctags="/opt/homebrew/Cellar/ctags/5.8_1/bin/ctags"
+export PATH=/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/ownia/.cargo/bin:/Users/ownia/go/bin:/Library/TeX/texbin
+setopt IGNORE_EOF
+PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+
+alias fig2eps=/Users/ownia/codespace/fig2ps-1.5/bin/fig2ps
+alias fig2ps=/Users/ownia/codespace/fig2ps-1.5/bin/fig2ps
+alias tmux="tmux -u -2"
+
+export HOMEBREW_FORCE_BREWED_GIT="1"
+
+[ -f "/Users/ownia/.ghcup/env" ] && source "/Users/ownia/.ghcup/env" # ghcup-env
+
+alias git='LANG=en_US git'
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
