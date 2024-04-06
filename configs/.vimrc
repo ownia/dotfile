@@ -64,6 +64,16 @@ let g:Lf_GtagsAutoGenerate = 1
 
 endif
 
+" Function
+function! PreviewMarkdown()
+  let l:path=expand('%:p')
+  silent execute "!echo ".l:path." > ~/.lastpreview.log"
+  :execute "bel vert terminal"
+endfunction
+
+" Map
+nmap <F4> : call PreviewMarkdown()<CR>clear<CR>glow -p $(cat ~/.lastpreview.log)<CR>
+
 " Config
 set nocompatible
 syntax on
