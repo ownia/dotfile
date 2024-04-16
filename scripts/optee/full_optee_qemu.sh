@@ -1,0 +1,3 @@
+# enable VirtFS, GDB
+# disable TEE ASLR
+make QEMU_VIRTFS_ENABLE=y QEMU_USERNET_ENABLE=y GDBSERVER=y
