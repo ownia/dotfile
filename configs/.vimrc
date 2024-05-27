@@ -126,3 +126,4 @@ set ruler
 set tags=./.tags;,.tags
 set laststatus=2
 set noshowmode
+set background=dark
