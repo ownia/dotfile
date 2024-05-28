@@ -12,7 +12,6 @@ if !exists('g:os')
   endif
 endif
 
-
 if g:os == 'mac'
   set langmenu=en_US
   let $LANG = 'en_US'
@@ -90,6 +89,10 @@ endfunction
 nmap <F4> : call PreviewMarkdown()<CR>clear<CR>glow -p $(cat ~/.lastpreview.log)<CR>
 
 " vim-lsp
+let g:lsp_settings = {
+\  'clangd': {'disabled': v:true}
+\}
+
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
