@@ -41,7 +41,22 @@ call plug#begin('~/.vim/plugged')
   Plug 'rust-lang/rust.vim'
   Plug 'prabirshrestha/vim-lsp'
   Plug 'mattn/vim-lsp-settings'
+  Plug 'tpope/vim-fugitive'
 call plug#end()
+
+" lightline
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitstatus', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component': {
+  \   'filename': '%f',
+  \ },
+  \ 'component_function': {
+  \   'gitstatus': 'FugitiveStatusline'
+  \ },
+  \ }
 
 " NERDTree
 let mapleader = ","
@@ -54,7 +69,7 @@ nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 "let Tlist_Use_Right_Window=1
 "let Tlist_Exit_OnlyWindow=1
 "let Tlist_WinWidth=50
-"" let Tlist_Sort_Type='name'
+"let Tlist_Sort_Type='name'
 "nnoremap <silent> <F2> :TlistOpen<CR>
 
 " tagbar
@@ -65,7 +80,6 @@ let g:tagbar_sort = 0
 " LeaderF
 "let g:Lf_GtagsAutoGenerate = 1
 
-
 " PreviewMarkdown
 function! PreviewMarkdown()
   let l:path=expand('%:p')
@@ -73,9 +87,9 @@ function! PreviewMarkdown()
   :execute "bel vert terminal"
 endfunction
 
-" Map
 nmap <F4> : call PreviewMarkdown()<CR>clear<CR>glow -p $(cat ~/.lastpreview.log)<CR>
 
+" vim-lsp
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
@@ -104,6 +118,9 @@ augroup lsp_install
   " call s:on_lsp_buffer_enabled only for languages that has the server registered.
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+
+" vim-fugitive
+nnoremap <leader>gb :Git blame<CR>:exec 'normal O'<CR>gg
 
 endif
 
