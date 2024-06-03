@@ -79,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -99,12 +99,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH=/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/ownia/.cargo/bin:/Users/ownia/go/bin:/Library/TeX/texbin
+export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/ownia/.cargo/bin:/Users/ownia/go/bin:/Library/TeX/texbin:/opt/homebrew/opt/python@3/libexec/bin:/opt/homebrew/sbin
 setopt IGNORE_EOF
 PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 
-alias fig2eps=/Users/ownia/codespace/fig2ps-1.5/bin/fig2ps
-alias fig2ps=/Users/ownia/codespace/fig2ps-1.5/bin/fig2ps
 alias tmux="tmux -u -2"
 
 export HOMEBREW_FORCE_BREWED_GIT="1"
@@ -115,3 +113,8 @@ alias git='LANG=en_US git'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Homebrew
+export CPATH=/opt/homebrew/include
+export LIBRARY_PATH=/opt/homebrew/lib
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkg-config:$PKG_CONFIG_PATH
+export HOMEBREW_EDITOR=vim
