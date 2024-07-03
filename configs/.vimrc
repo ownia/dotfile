@@ -223,6 +223,7 @@ function! PreviewMarkdown()
   :execute "bel vert terminal"
 endfunction
 
+nnoremap <silent> <F3> :noh<CR>
 nmap <F4> : call PreviewMarkdown()<CR>clear<CR>glow -p $(cat ~/.lastpreview.log)<CR>
 
 " vim-lsp
