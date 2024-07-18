@@ -231,6 +231,10 @@ let g:lsp_settings = {
 \  'clangd': {'disabled': v:true}
 \}
 
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_echo_delay = 0
+let g:lsp_diagnostics_signs_delay = 0
+
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
