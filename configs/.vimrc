@@ -18,6 +18,7 @@ endif
 if g:os == 'mac'
   set langmenu=en_US
   let $LANG = 'en_US'
+  set clipboard=unnamed
 endif
 
 "" Generic platform config
