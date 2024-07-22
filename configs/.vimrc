@@ -1,4 +1,5 @@
 "" Check OS
+
 if !exists('g:os')
   if has('mac')
     let g:os = 'mac'
@@ -12,10 +13,14 @@ if !exists('g:os')
   endif
 endif
 
+"" macOS config
+
 if g:os == 'mac'
   set langmenu=en_US
   let $LANG = 'en_US'
 endif
+
+"" Generic platform config
 
 if g:os == 'mac' || g:version > '4'
 
@@ -307,3 +312,7 @@ set tags=./.tags;,.tags
 set laststatus=2
 set noshowmode
 set background=dark
+" https://vimhelp.org/options.txt.html#%27clipboard%27
+if has('unnamedplus')
+  set clipboard=unnamedplus
+endif
