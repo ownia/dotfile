@@ -184,19 +184,31 @@ call plug#begin('~/.vim/plugged')
   Plug 'prabirshrestha/vim-lsp'
   Plug 'mattn/vim-lsp-settings'
   Plug 'tpope/vim-fugitive'
+  Plug 'halkn/lightline-lsp'
 call plug#end()
 
 " lightline
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitstatus', 'readonly', 'filename', 'modified' ] ]
+  \             [ 'gitstatus', 'readonly', 'filename', 'modified' ],
+  \             [ 'lsp_errors', 'lsp_warnings', 'lsp_ok'] ]
   \ },
   \ 'component': {
   \   'filename': '%f',
   \ },
   \ 'component_function': {
   \   'gitstatus': 'FugitiveStatusline'
+  \ },
+  \ 'component_expand': {
+  \   'lsp_warnings': 'lightline_lsp#warnings',
+  \   'lsp_errors':   'lightline_lsp#errors',
+  \   'lsp_ok':       'lightline_lsp#ok',
+  \ },
+  \ 'component_type': {
+  \   'lsp_warnings': 'warning',
+  \   'lsp_errors':   'error',
+  \   'lsp_ok':       'middle',
   \ },
   \ }
 
