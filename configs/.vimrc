@@ -232,7 +232,7 @@ endfunction
 nnoremap <silent> <F3> :noh<CR>
 nmap <F4> : call PreviewMarkdown()<CR>clear<CR>glow -p $(cat ~/.lastpreview.log)<CR>
 
-" vim-lsp
+" vim-lsp and vim-lsp-settings
 let g:lsp_settings = {
 \  'clangd': {'disabled': v:true}
 \}
@@ -269,6 +269,16 @@ augroup lsp_install
   " call s:on_lsp_buffer_enabled only for languages that has the server registered.
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+
+function! ToggleClangd()
+  let g:lsp_settings['clangd']['disabled'] = v:false
+  execute 'LspInstallServer!' 'clangd'
+  sleep 1
+  q!
+  call lsp#activate()
+endfunction
+
+nnoremap <leader>gc :call ToggleClangd()<CR>
 
 " vim-fugitive
 nnoremap <leader>gb :Git blame<CR>:exec 'normal O'<CR>gg
