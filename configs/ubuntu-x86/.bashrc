@@ -91,8 +91,13 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
-export TERM=xterm-256color
+alias fd='fdfind'
+# dtb -> dts
+alias dts='dtc -I dtb -O dts'
+# dts -> dtb
+alias dtb='dtc -I dts -O dtb'
+alias tmux='tmux -2'
+alias bat='batcat --style=plain'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -117,4 +122,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-source "$HOME/.cargo/env"
+
+export PATH=$PATH:/usr/local/go/bin
