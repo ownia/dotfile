@@ -8,6 +8,10 @@ if !exists('g:os')
     if !exists('g:version')
       let g:version = system("uname -r | awk '{print substr($1,1,1)}'")
     endif
+    " https://vi.stackexchange.com/a/43358
+    if !exists('g:distro')
+      let g:distro = readfile('/etc/os-release')->filter({k,v -> v =~# '^ID='})[0]->slice(3)
+    endif
   else
     let g:os = 'unknown'
   endif
@@ -36,6 +40,13 @@ if has("cscope")
     " check cscope for definition of a symbol before checking ctags: set to 1
     " if you want the reverse search order.
     set csto=0
+
+    " Fix Fedora issue:
+    " E568: Duplicate cscope database not added
+    " https://src.fedoraproject.org/rpms/vim/blob/rawhide/f/vimrc
+    if g:distro == 'fedora'
+        set nocscopeverbose
+    endif
 
     " add any cscope database in current directory
     if filereadable("cscope.out")
