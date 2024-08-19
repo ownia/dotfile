@@ -48,6 +48,13 @@ if has("cscope")
         set nocscopeverbose
     endif
 
+    " Support gtags-cscope
+    " https://cvs.savannah.gnu.org/viewvc/*checkout*/global/global/gtags-cscope.vim
+    if filereadable("GTAGS")
+        set csprg=gtags-cscope
+        cs add GTAGS
+    endif
+
     " add any cscope database in current directory
     if filereadable("cscope.out")
         cs add cscope.out
