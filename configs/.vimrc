@@ -44,7 +44,7 @@ if has("cscope")
     " Fix Fedora issue:
     " E568: Duplicate cscope database not added
     " https://src.fedoraproject.org/rpms/vim/blob/rawhide/f/vimrc
-    if g:distro == 'fedora'
+    if exists('g:distro') && g:distro == 'fedora'
         set nocscopeverbose
     endif
 
