@@ -349,7 +349,7 @@ set softtabstop=8
 set shiftwidth=8
 set smarttab
 set ruler
-set tags=./.tags;,.tags
+"set tags=tags
 set laststatus=2
 set noshowmode
 set background=dark
