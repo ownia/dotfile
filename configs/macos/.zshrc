@@ -99,7 +99,7 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/ownia/.cargo/bin:/Users/ownia/go/bin:/Library/TeX/texbin:/opt/homebrew/opt/python@3/libexec/bin:/opt/homebrew/sbin
+export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/ownia/.cargo/bin:/Users/ownia/go/bin:/Library/TeX/texbin:/opt/homebrew/opt/python@3/libexec/bin:/opt/homebrew/sbin:/Applications/VMware\ Fusion.app/Contents/Library
 setopt IGNORE_EOF
 PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 
