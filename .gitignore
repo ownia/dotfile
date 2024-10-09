@@ -1,2 +1,2 @@
-scripts/minicom/minicom.log
+scripts/minicom/*.log
 scripts/picocom/picocom.log
