@@ -313,6 +313,7 @@ nnoremap <leader>gc :call ToggleClangd()<CR>
 " vim-fugitive
 nnoremap <leader>gb :Git blame<CR>:exec 'normal O'<CR>gg
 
+" Global copy-paste
 " https://github.com/ConradIrwin/vim-bracketed-paste/blob/master/plugin/bracketed-paste.vim
 let &t_ti .= "\<Esc>[?2004h"
 let &t_te = "\e[?2004l" . &t_te
@@ -330,6 +331,17 @@ imap <expr> <f28> XTermPasteBegin("")
 vmap <expr> <f28> XTermPasteBegin("c")
 cmap <f28> <nop>
 cmap <f29> <nop>
+
+" Custom mapping key helper
+nnoremap <leader><F1> :echon
+\ "F3 - stop the highlighting\n"
+\ "F4 - preview markdown file\n"
+\ "F8 - toggle tagbar\n"
+\ ", + gb - git blame cursor line\n"
+\ ", + gc - toggle clangd lsp\n"
+\ ", + n - toggle NERDTree\n"
+\ ", + F1 - this custom helper\n"
+\<CR>
 
 endif
 
