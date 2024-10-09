@@ -9,11 +9,11 @@ EOF
 
 config() {
     echo "update .vimrc"
-    if cp configs/.vimrc ~/.vimrc; then
+    if ln -sf "$PWD"/configs/.vimrc ~/.vimrc; then
         echo "done"
     fi
     echo "update .tmux.conf"
-    if cp configs/.tmux.conf ~/.tmux.conf; then
+    if ln -sf "$PWD"/configs/.tmux.conf ~/.tmux.conf; then
         echo "done"
     fi
 }
