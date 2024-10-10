@@ -354,7 +354,10 @@ set hls
 set mouse=a
 set listchars=trail:.,tab:>-,space:.
 set list
-highlight TabSpace ctermfg=DarkGrey
+set background=dark
+highlight TabSpace ctermfg=darkgrey
+highlight ModeMsg ctermfg=lightblue
+highlight Comment ctermfg=darkred
 match TabSpace /\t\| /
 set tabstop=8
 set softtabstop=8
@@ -364,7 +367,6 @@ set ruler
 "set tags=tags
 set laststatus=2
 set noshowmode
-set background=dark
 " https://vimhelp.org/options.txt.html#%27clipboard%27
 if has('unnamedplus')
   set clipboard=unnamedplus
