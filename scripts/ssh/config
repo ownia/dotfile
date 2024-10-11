@@ -1,0 +1,9 @@
+Host ubuntu
+    HostName 10.169.38.76
+    User weiouy01
+    IdentityFile ~/.ssh/id_rsa
+
+Host radax
+    HostName 10.169.36.60
+    User root
+    IdentityFile ~/.ssh/id_rsa
