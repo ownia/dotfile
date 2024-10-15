@@ -203,6 +203,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/vim-lsp-settings'
   Plug 'tpope/vim-fugitive'
   Plug 'halkn/lightline-lsp'
+  Plug 'farmergreg/vim-lastplace'
 call plug#end()
 
 " lightline
