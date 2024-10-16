@@ -118,3 +118,7 @@ export CPATH=/opt/homebrew/include
 export LIBRARY_PATH=/opt/homebrew/lib
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkg-config:$PKG_CONFIG_PATH
 export HOMEBREW_EDITOR=vim
+
+_fg () { fg &> /dev/null }
+zle -N _fg
+bindkey ^Z _fg
