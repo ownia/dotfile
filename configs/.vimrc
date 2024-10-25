@@ -312,7 +312,7 @@ endfunction
 nnoremap <leader>gc :call ToggleClangd()<CR>
 
 " vim-fugitive
-nnoremap <leader>gb :Git blame<CR>:exec 'normal O'<CR>gg
+nnoremap <leader>gb :Git blame<CR>:exec 'normal i'<CR>gg
 
 " Global copy-paste
 " https://github.com/ConradIrwin/vim-bracketed-paste/blob/master/plugin/bracketed-paste.vim
