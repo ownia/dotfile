@@ -29,6 +29,8 @@ endif
 
 if g:os == 'mac' || g:version > '4'
 
+let mapleader = ","
+
 " https://cscope.sourceforge.net/cscope_maps.vim
 if has("cscope")
 
@@ -232,8 +234,21 @@ let g:lightline = {
   \ }
 
 " NERDTree
-let mapleader = ","
-nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+function NERDTreeToggleCustom()
+  if exists("g:NERDTree") && g:NERDTree.IsOpen()
+    if &filetype == 'nerdtree'
+      :NERDTreeClose
+    else
+      :NERDTreeFocus
+    endif
+  elseif &filetype == 'nerdtree'
+    :NERDTreeToggle
+  else
+    :NERDTreeFind
+  endif
+endfunction
+
+nnoremap <leader>n :call NERDTreeToggleCustom()<CR>
 
 " Tlist
 "let Tlist_Auto_Highlight_Tag=1
