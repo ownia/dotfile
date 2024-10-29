@@ -12,8 +12,14 @@ config() {
     if ln -sf "$PWD"/configs/.vimrc ~/.vimrc; then
         echo "done"
     fi
+
     echo "update .tmux.conf"
     if ln -sf "$PWD"/configs/.tmux.conf ~/.tmux.conf; then
+        echo "done"
+    fi
+
+    echo "update ssh config"
+    if ln -sf "$PWD"/configs/.ssh_config ~/.ssh/config; then
         echo "done"
     fi
 }
