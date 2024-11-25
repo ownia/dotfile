@@ -19,7 +19,7 @@ config() {
     fi
 
     echo "update ssh config"
-    if ln -sf "$PWD"/configs/.ssh_config ~/.ssh/config; then
+    if install -g $USER -o $USER "$PWD"/configs/.ssh_config ~/.ssh/config; then
         echo "done"
     fi
 }
