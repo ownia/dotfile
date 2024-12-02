@@ -189,9 +189,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
+"
+"autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+"  \| PlugInstall --sync | source $MYVIMRC
+"\| endif
 
 " Deploy vim-plug
 call plug#begin('~/.vim/plugged')
@@ -206,6 +207,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-fugitive'
   Plug 'halkn/lightline-lsp'
   Plug 'farmergreg/vim-lastplace'
+  "Plug 'dstein64/vim-startuptime'
 call plug#end()
 
 " lightline
@@ -262,7 +264,8 @@ nnoremap <leader>n :call NERDTreeToggleCustom()<CR>
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
-autocmd VimEnter * nested :call tagbar#autoopen(1)
+"autocmd VimEnter * nested :call tagbar#autoopen(1)
+autocmd FileType * nested :call tagbar#autoopen(0)
 let g:tagbar_sort = 0
 
 " LeaderF
