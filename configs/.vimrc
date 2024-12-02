@@ -208,6 +208,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'halkn/lightline-lsp'
   Plug 'farmergreg/vim-lastplace'
   "Plug 'dstein64/vim-startuptime'
+  Plug 'bfrg/vim-c-cpp-modern'
 call plug#end()
 
 " lightline
@@ -331,6 +332,12 @@ nnoremap <leader>gc :call ToggleClangd()<CR>
 
 " vim-fugitive
 nnoremap <leader>gb :Git blame<CR>:exec 'normal i'<CR>gg
+
+" vim-c-cpp-modern
+let g:cpp_attributes_highlight = 1
+let g:cpp_member_highlight = 1
+let g:cpp_operator_highlight = 1
+let g:cpp_simple_highlight = 1
 
 " Global copy-paste
 " https://github.com/ConradIrwin/vim-bracketed-paste/blob/master/plugin/bracketed-paste.vim
