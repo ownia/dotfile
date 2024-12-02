@@ -1,0 +1,24 @@
+%YAML 1.2
+---
+description: >-
+  Cutsom shrinkwrap config
+
+concrete: true
+
+layers:
+  - FVP_Base_RevC-2xAEMvA-base.yaml
+  - tfa-base.yaml
+  - dt-base.yaml
+  - ns-edk2-base.yaml
+  - arch/v9.3.yaml
+
+build:
+  tfa:
+    params:
+      ENABLE_MTE2: 1
+
+run:
+  params:
+    -C cluster0.memory_tagging_support_level: 2
+    -C cluster1.memory_tagging_support_level: 2
+    -C bp.dram_metadata.is_enabled: 1
