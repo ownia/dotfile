@@ -237,6 +237,12 @@ let g:lightline = {
   \ }
 
 " NERDTree
+
+" same as tagbar
+" https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt#L619
+" g:tagbar_width = 40
+let g:NERDTreeWinSize = 40
+
 function NERDTreeToggleCustom()
   if exists("g:NERDTree") && g:NERDTree.IsOpen()
     if &filetype == 'nerdtree'
