@@ -272,7 +272,9 @@ nnoremap <leader>n :call NERDTreeToggleCustom()<CR>
 " tagbar
 nmap <F8> :TagbarToggle<CR>
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
-autocmd FileType * nested :call tagbar#autoopen(0)
+if !&diff
+  autocmd FileType * nested :call tagbar#autoopen(0)
+endif
 let g:tagbar_sort = 0
 
 " LeaderF
