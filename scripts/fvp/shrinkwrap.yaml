@@ -7,15 +7,17 @@ concrete: true
 
 layers:
   - FVP_Base_RevC-2xAEMvA-base.yaml
+  - arch/v9.3.yaml
   - tfa-base.yaml
   - dt-base.yaml
   - ns-edk2-base.yaml
-  - arch/v9.3.yaml
 
 build:
   tfa:
     params:
-      ENABLE_MTE2: 1
+      ENABLE_FEAT_MTE2: 1
+      ENABLE_SVE_FOR_SWD: 1
+      ENABLE_SME_FOR_SWD: 1
 
 run:
   params:
