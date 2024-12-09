@@ -98,6 +98,7 @@ alias dts='dtc -I dtb -O dts'
 alias dtb='dtc -I dts -O dtb'
 alias tmux='tmux -2'
 alias bat='batcat --style=plain'
+alias xclip='xclip -selection clipboard'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
