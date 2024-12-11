@@ -1,0 +1,14 @@
+run:
+  params:
+    -C cluster0.sve.has_sme2: 0
+    -C cluster0.sve.has_sme: 0
+    -C cluster1.sve.has_sme2: 0
+    -C cluster1.sve.has_sme: 0
+    -C cluster0.sve.has_sve2: 0
+    -C cluster1.sve.has_sve2: 0
+
+    #    cluster0.sve.has_sme_fa64: 1
+    #    cluster1.sve.has_sme_fa64: 1
+    #    cluster0.has_fpmr: 1
+    #    cluster1.has_fpmr: 1
+
