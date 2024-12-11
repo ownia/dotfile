@@ -389,10 +389,11 @@ set mouse=a
 set listchars=trail:.,tab:>-,space:.
 set list
 set background=dark
-highlight TabSpace ctermfg=darkgrey
 highlight ModeMsg ctermfg=lightblue
 highlight Comment ctermfg=darkred
-match TabSpace /\t\| /
+highlight TabSpace ctermfg=darkgrey
+au filetype * match TabSpace /\t\| /
+highlight! link DiffText ToDo
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
