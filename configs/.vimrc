@@ -280,14 +280,16 @@ let g:tagbar_sort = 0
 " LeaderF
 "let g:Lf_GtagsAutoGenerate = 1
 
+" hlsearch
+nnoremap <silent> <F3> :noh<CR>
+
 " PreviewMarkdown
 function! PreviewMarkdown()
   let l:path=expand('%:p')
   silent execute "!echo ".l:path." > ~/.lastpreview.log"
-  :execute "bel vert terminal"
+  :execute "tab :terminal"
 endfunction
 
-nnoremap <silent> <F3> :noh<CR>
 nmap <F4> : call PreviewMarkdown()<CR>clear<CR>glow -p $(cat ~/.lastpreview.log)<CR>
 
 " vim-lsp and vim-lsp-settings
