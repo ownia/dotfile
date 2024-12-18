@@ -394,7 +394,7 @@ set background=dark
 highlight ModeMsg ctermfg=lightblue
 highlight Comment ctermfg=darkred
 highlight TabSpace ctermfg=darkgrey
-au filetype * match TabSpace /\t\| /
+au BufRead,BufNewFile * match TabSpace /\t\| /
 highlight! link DiffText ToDo
 set tabstop=8
 set softtabstop=8
