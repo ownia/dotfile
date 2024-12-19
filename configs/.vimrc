@@ -215,14 +215,21 @@ call plug#end()
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitstatus', 'readonly', 'filename', 'modified' ],
-  \             [ 'lsp_errors', 'lsp_warnings', 'lsp_ok'] ]
+  \             [ 'gitstatus', 'filename', 'modified' ],
+  \             [ 'lsp_errors', 'lsp_warnings', 'lsp_ok', ],
+  \             [ 'lineinfo' ] ],
+  \   'right': [ ],
+  \ },
+  \ 'inactive': {
+  \   'left': [ [ 'mode' ] ],
+  \   'right': [ ],
   \ },
   \ 'component': {
-  \   'filename': '%f',
   \ },
   \ 'component_function': {
-  \   'gitstatus': 'FugitiveStatusline'
+  \   'mode': 'LightlineMode',
+  \   'filename': 'LightlineFilename',
+  \   'gitstatus': 'FugitiveStatusline',
   \ },
   \ 'component_expand': {
   \   'lsp_warnings': 'lightline_lsp#warnings',
@@ -235,6 +242,26 @@ let g:lightline = {
   \   'lsp_ok':       'middle',
   \ },
   \ }
+
+function! LightlineFilename()
+  let fname = expand('%:t')
+  return fname =~# '^__Tagbar__' ? '' :
+       \ fname =~# 'NERD_tree' ? '' :
+       \ expand('%:t') !=# '' ? expand('%:t') : ''
+endfunction
+
+function! LightlineMode()
+  let fname = expand('%:t')
+  return fname =~# '^__Tagbar__' ? 'Tagbar' :
+       \ fname ==# 'ControlP' ? 'CtrlP' :
+       \ fname ==# '__Gundo__' ? 'Gundo' :
+       \ fname ==# '__Gundo_Preview__' ? 'Gundo Preview' :
+       \ fname =~# 'NERD_tree' ? 'NERDTree' :
+       \ &ft ==# 'unite' ? 'Unite' :
+       \ &ft ==# 'vimfiler' ? 'VimFiler' :
+       \ &ft ==# 'vimshell' ? 'VimShell' :
+       \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
 
 " NERDTree
 
