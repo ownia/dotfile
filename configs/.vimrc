@@ -396,14 +396,18 @@ cmap <f28> <nop>
 cmap <f29> <nop>
 
 " Custom mapping key helper
+" https://github.com/preservim/tagbar/pull/875
+nnoremap <leader>q :qall<CR>
+
 nnoremap <leader><F1> :echon
-\ "F3 - stop the highlighting\n"
-\ "F4 - preview markdown file\n"
-\ "F8 - toggle tagbar\n"
+\ "F3     - stop the highlighting\n"
+\ "F4     - preview markdown file\n"
+\ "F8     - toggle tagbar\n"
 \ ", + gb - git blame cursor line\n"
 \ ", + gc - toggle clangd lsp\n"
-\ ", + n - toggle NERDTree\n"
+\ ", + n  - toggle NERDTree\n"
 \ ", + F1 - this custom helper\n"
+\ ", + q  - :qall\n"
 \<CR>
 
 endif
