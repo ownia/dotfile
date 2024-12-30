@@ -3,7 +3,7 @@
 usage() {
     cat 1>&2 <<EOF
 dotfile:
-      config - update configs (vim, tmux)
+      config - update configs
 EOF
 }
 
@@ -19,8 +19,17 @@ config() {
     fi
 
     echo "update ssh config"
-    if install -o $USER "$PWD"/configs/.ssh_config ~/.ssh/config; then
+    if install -o "$USER" "$PWD"/configs/.ssh_config ~/.ssh/config; then
         echo "done"
+    fi
+
+    echo "update ghostty config"
+    if [ -d ~/.config/ghostty/ ]; then
+        if ln -sf "$PWD"/configs/.ghostty ~/.config/ghostty/config; then
+            echo "done"
+        fi
+    else
+        echo "ghostty not installed"
     fi
 }
 
