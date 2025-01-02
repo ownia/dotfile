@@ -1,19 +1,17 @@
 Host ubuntu
     HostName 10.169.38.63
     User weiouy01
-    IdentityFile ~/.ssh/id_rsa
 
 Host radax
     HostName 10.169.36.60
     User root
-    IdentityFile ~/.ssh/id_rsa
+    ForwardX11 yes
 
 Host rpi5
     HostName 10.169.36.26
     User ownia
-    IdentityFile ~/.ssh/id_rsa
 
 Host debian
-    HostName 10.169.38.13
+    HostName 10.169.38.11
     User root
-    IdentityFile ~/.ssh/id_rsa
+    ForwardX11 yes
