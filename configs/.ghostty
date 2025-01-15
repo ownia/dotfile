@@ -24,7 +24,10 @@ selection-foreground = #000000
 bold-is-bright = true
 window-theme = dark
 macos-titlebar-style = tabs
+cursor-style = block
 
 # Font
 font-family = "Monaco"
 font-size = "12"
+
+title = " "
