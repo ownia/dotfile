@@ -124,8 +124,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$PATH:/usr/local/go/bin
-
 stty susp undef
 _fg() { fg &> /dev/null; }
 bind -x '"\C-z": _fg'
