@@ -419,7 +419,7 @@ set listchars=trail:.,tab:>-,space:.
 set list
 set background=dark
 highlight ModeMsg ctermfg=lightblue
-highlight Comment ctermfg=darkred
+highlight Comment ctermfg=red
 highlight TabSpace ctermfg=darkgrey
 au BufRead,BufNewFile * match TabSpace /\t\| /
 highlight! link DiffText ToDo
