@@ -31,3 +31,6 @@ font-family = "Monaco"
 font-size = "12"
 
 title = " "
+
+# Style
+mouse-hide-while-typing = true
