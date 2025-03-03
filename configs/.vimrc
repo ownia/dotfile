@@ -217,7 +217,7 @@ let g:lightline = {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitstatus', 'filename', 'modified' ],
   \             [ 'lsp_errors', 'lsp_warnings', 'lsp_ok', ],
-  \             [ 'lineinfo' ] ],
+  \             [ 'lineinfo', 'filetype' ] ],
   \   'right': [ ],
   \ },
   \ 'inactive': {
@@ -323,6 +323,7 @@ let g:lsp_diagnostics_echo_delay = 0
 let g:lsp_diagnostics_signs_delay = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_diagnostics_highlights_enabled = 0
+let g:lsp_settings_enable_suggestions = 0
 
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
@@ -435,3 +436,4 @@ set noshowmode
 if has('unnamedplus')
   set clipboard=unnamedplus
 endif
+autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
