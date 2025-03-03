@@ -395,6 +395,7 @@ cmap <f29> <nop>
 " Custom mapping key helper
 " https://github.com/preservim/tagbar/pull/875
 nnoremap <leader>q :qall<CR>
+nnoremap <leader>w :wqall<CR>
 
 nnoremap <leader><F1> :echon
 \ "F3     - stop the highlighting\n"
@@ -405,6 +406,7 @@ nnoremap <leader><F1> :echon
 \ ", + n  - toggle NERDTree\n"
 \ ", + F1 - this custom helper\n"
 \ ", + q  - :qall\n"
+\ ", + w  - :wqall\n"
 \<CR>
 
 endif
