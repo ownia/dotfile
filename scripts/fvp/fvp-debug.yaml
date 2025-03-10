@@ -1,0 +1,3 @@
+run: params:
+    --iris-connect tcpserver,allowRemote,port=7100: null
+    --print-port-number: null
