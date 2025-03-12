@@ -392,6 +392,9 @@ vmap <expr> <f28> XTermPasteBegin("c")
 cmap <f28> <nop>
 cmap <f29> <nop>
 
+" c.vim
+let g:c_syntax_for_h = 1
+
 " Custom mapping key helper
 " https://github.com/preservim/tagbar/pull/875
 nnoremap <leader>q :qall<CR>
