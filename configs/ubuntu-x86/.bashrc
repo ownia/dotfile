@@ -91,7 +91,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias fd='fdfind'
+alias rg='rg --hidden --no-ignore'
+alias fd='fdfind --hidden --no-ignore'
 # dtb -> dts
 alias dts='dtc -I dtb -O dts'
 # dts -> dtb
