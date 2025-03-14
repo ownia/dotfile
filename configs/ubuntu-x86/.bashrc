@@ -100,6 +100,9 @@ alias tmux='tmux -2'
 alias bat='batcat --style=plain'
 alias xclip='xclip -selection clipboard'
 
+STORAGE_0="/data_nvme0n1"
+alias shrinkwrap="$STORAGE_0/shrinkwrap/shrinkwrap/shrinkwrap"
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
