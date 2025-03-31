@@ -15,3 +15,8 @@ Host debian
     HostName 10.169.38.11
     User root
     ForwardX11 yes
+
+Host cix
+    HostName 10.169.38.39
+    User root
+    ForwardX11 yes
