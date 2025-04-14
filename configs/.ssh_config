@@ -8,15 +8,17 @@ Host radax
     ForwardX11 yes
 
 Host rpi5
-    HostName 10.169.36.26
+    HostName 10.169.36.52
     User ownia
 
 Host debian
-    HostName 10.169.38.11
+    HostName 10.169.38.28
+    ProxyCommand bash -c "exec nc \$(arp -n | rg f6:75:99:ea:fe:1b | awk '{ print \$1 }') 22"
     User root
     ForwardX11 yes
 
 Host cix
-    HostName 10.169.38.39
+    HostName 10.169.38.25
+    ProxyCommand bash -c "exec nc \$(arp -n | rg 00:48:54:20:0e:3a | awk '{ print \$1 }') 22"
     User root
     ForwardX11 yes
