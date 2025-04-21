@@ -16,8 +16,11 @@ build:
   tfa:
     params:
       ENABLE_FEAT_MTE2: 1
+      ENABLE_SVE_FOR_NS: 1
       ENABLE_SVE_FOR_SWD: 1
+      ENABLE_SME_FOR_NS: 1
       ENABLE_SME_FOR_SWD: 1
+      ENABLE_SME2_FOR_NS: 1
 
 run:
   params:
