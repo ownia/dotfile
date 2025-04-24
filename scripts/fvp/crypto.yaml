@@ -1,0 +1,13 @@
+run:
+  params:
+    --plugin /data_nvme0n1/fvp/FastModelsPortfolio_11.28/plugins/Linux64_GCC-9.3/Crypto.so: null
+    -C cluster0.cpu0.crypto_sm4: 1
+    -C cluster0.cpu1.crypto_sm4: 1
+    -C cluster0.cpu2.crypto_sm4: 1
+    -C cluster0.cpu3.crypto_sm4: 1
+    -C cluster1.cpu0.crypto_sm4: 1
+    -C cluster1.cpu1.crypto_sm4: 1
+    -C cluster1.cpu2.crypto_sm4: 1
+    -C cluster1.cpu3.crypto_sm4: 1
+    -C cluster0.sve.has_sve2_sm4: 1
+    -C cluster1.sve.has_sve2_sm4: 1
