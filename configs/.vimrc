@@ -402,6 +402,15 @@ let g:c_syntax_for_h = 1
 nnoremap <leader>q :qall<CR>
 nnoremap <leader>w :wqall<CR>
 
+" neomutt
+function! AddSignature()
+  call append(line('.'), [
+        \ 'Best Regards,',
+        \ 'Weizhao'
+        \ ])
+endfunction
+nnoremap <leader>s :call AddSignature()<CR>
+
 nnoremap <leader><F1> :echon
 \ "F3     - stop the highlighting\n"
 \ "F4     - preview markdown file\n"
@@ -412,6 +421,7 @@ nnoremap <leader><F1> :echon
 \ ", + F1 - this custom helper\n"
 \ ", + q  - :qall\n"
 \ ", + w  - :wqall\n"
+\ ", + s  - add neomutt signature\n"
 \<CR>
 
 endif
