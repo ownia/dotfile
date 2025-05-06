@@ -401,6 +401,8 @@ let g:c_syntax_for_h = 1
 " https://github.com/preservim/tagbar/pull/875
 nnoremap <leader>q :qall<CR>
 nnoremap <leader>w :wqall<CR>
+" https://vi.stackexchange.com/a/18895
+nnoremap <silent> cs :let @/=expand('<cword>')<cr>cgn
 
 " neomutt
 function! AddSignature()
@@ -422,6 +424,7 @@ nnoremap <leader><F1> :echon
 \ ", + q  - :qall\n"
 \ ", + w  - :wqall\n"
 \ ", + s  - add neomutt signature\n"
+\ "cs     - under cursor cgn\n"
 \<CR>
 
 endif
