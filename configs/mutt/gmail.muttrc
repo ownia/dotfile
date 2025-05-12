@@ -1,0 +1,34 @@
+set imap_user = "o451686892@gmail.com"
+set imap_pass = ""
+set realname = "Weizhao Ouyang"
+set folder = "imaps://$imap_user@imap.gmail.com:993"
+set smtp_url = "smtp://o451686892@smtp.gmail.com:587/"
+set from=$imap_user
+set use_from=yes
+set spoolfile = "+U-Boot"
+set header_cache = ~/.mutt/cache/header
+set message_cachedir = ~/.mutt/cache/message
+unset imap_passive
+set imap_keepalive = 300
+set mail_check = 120
+set hide_thread_subject = no
+set editor='vim'
+set askcc
+unset use_domain
+set ssl_force_tls = yes
+
+#https://neomutt.org/feature/use-threads
+set use_threads=threads sort=reverse-last-date sort_aux=date
+
+#https://github.com/neomutt/neomutt/blob/main/contrib/vim-keys/vim-keys.rc
+bind attach,browser,index       g   noop
+bind attach,browser,index       gg  first-entry
+bind attach,browser,index       G   last-entry
+bind pager                      g   noop
+bind pager                      gg  top
+bind pager                      G   bottom
+bind pager                      k   previous-line
+bind pager                      j   next-line
+
+#custom
+bind index,pager                r   group-reply
