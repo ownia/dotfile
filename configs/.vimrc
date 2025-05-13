@@ -209,6 +209,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'farmergreg/vim-lastplace'
   "Plug 'dstein64/vim-startuptime'
   Plug 'bfrg/vim-c-cpp-modern'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " lightline
@@ -414,6 +416,11 @@ function! AddSignature()
 endfunction
 nnoremap <leader>s :call AddSignature()<CR>
 
+" fzf
+let g:fzf_vim = {}
+let g:fzf_vim.preview_window = []
+nnoremap <leader>f :Files!<Cr>
+
 nnoremap <leader><F1> :echon
 \ "F3     - stop the highlighting\n"
 \ "F4     - preview markdown file\n"
@@ -425,6 +432,7 @@ nnoremap <leader><F1> :echon
 \ ", + q  - :qall\n"
 \ ", + w  - :wqall\n"
 \ ", + s  - add neomutt signature\n"
+\ ", + f  - fzf.vim Files\n"
 \ "cs     - under cursor cgn\n"
 \<CR>
 
