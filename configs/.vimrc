@@ -326,14 +326,15 @@ let g:lsp_diagnostics_signs_delay = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_diagnostics_highlights_enabled = 0
 let g:lsp_settings_enable_suggestions = 0
+let g:lsp_settings_filetype_python = ['pyright-langserver']
 
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> gs <plug>(lsp-document-symbol-search)
-  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  "nmap <buffer> gs <plug>(lsp-document-symbol-search)
+  "nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
   nmap <buffer> gr <plug>(lsp-references)
   nmap <buffer> gi <plug>(lsp-implementation)
   nmap <buffer> gt <plug>(lsp-type-definition)
