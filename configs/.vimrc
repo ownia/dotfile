@@ -420,6 +420,7 @@ nnoremap <leader>s :call AddSignature()<CR>
 let g:fzf_vim = {}
 let g:fzf_vim.preview_window = []
 nnoremap <leader>f :Files!<Cr>
+cnoremap <expr> rg getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg'
 
 nnoremap <leader><F1> :echon
 \ "F3     - stop the highlighting\n"
