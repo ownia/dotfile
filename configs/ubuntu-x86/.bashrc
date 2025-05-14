@@ -131,3 +131,8 @@ fi
 stty susp undef
 _fg() { fg &> /dev/null; }
 bind -x '"\C-z": _fg'
+
+# toolchain
+export PATH=/data_nvme0n1/prebulit/*/bin:$PATH
+# fzf
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
