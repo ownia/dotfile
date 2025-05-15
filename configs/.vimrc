@@ -400,13 +400,6 @@ cmap <f29> <nop>
 " c.vim
 let g:c_syntax_for_h = 1
 
-" Custom mapping key helper
-" https://github.com/preservim/tagbar/pull/875
-nnoremap <leader>q :qall<CR>
-nnoremap <leader>w :wqall<CR>
-" https://vi.stackexchange.com/a/18895
-nnoremap <silent> cs :let @/=expand('<cword>')<cr>cgn
-
 " neomutt
 function! AddSignature()
   call append(line('.'), [
@@ -421,7 +414,29 @@ let g:fzf_vim = {}
 let g:fzf_vim.preview_window = []
 nnoremap <leader>f :Files!<Cr>
 cnoremap <expr> rg getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg'
+" https://github.com/junegunn/fzf.vim/issues/837#issuecomment-1582511811 with some changes
+command! -bang -nargs=* -complete=custom,RgComplete Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.<q-args>, 1,
+  \   fzf#vim#with_preview({
+  \     'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]
+  \   }), <bang>1)
+function RgComplete (A,L,P)
+  echom a:A[0]
+  if (a:A[0] == '-')
+    return system("rg -h | grep '\\-.\\?[0-9A-Za-z-]*' -o | sort -u")
+  endif
+  if (a:A[0:1] == './')
+    return globpath('.', a:A[2:]..'*')
+  endif
+endfunction
 
+" Custom mapping key helper
+" https://github.com/preservim/tagbar/pull/875
+nnoremap <leader>q :qall<CR>
+nnoremap <leader>w :wqall<CR>
+" https://vi.stackexchange.com/a/18895
+nnoremap <silent> cs :let @/=expand('<cword>')<cr>cgn
 nnoremap <leader><F1> :echon
 \ "F3     - stop the highlighting\n"
 \ "F4     - preview markdown file\n"
