@@ -419,7 +419,8 @@ command! -bang -nargs=* -complete=custom,RgComplete Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always '.<q-args>, 1,
   \   fzf#vim#with_preview({
-  \     'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]
+  \     'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2],
+  \     'options': '--bind "j:down,k:up"',
   \   }), <bang>1)
 function RgComplete (A,L,P)
   echom a:A[0]
