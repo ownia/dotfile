@@ -1,26 +1,27 @@
 set imap_user = "weizhao.ouyang@arm.com"
 set realname = "Weizhao Ouyang"
 set folder="imaps://outlook.office365.com:993/"
-#set smtp_url="smtp://${imap_user}@smtp.office365.com:587/"
 set imap_authenticators="xoauth2"
 set imap_oauth_refresh_command="/data_nvme0n1/neomutt/neomutt-20250113/contrib/oauth2/mutt_oauth2.py /data_nvme0n1/neomutt/weizhao.ouyang@arm.com.tokens"
-set smtp_url = "smtp://weiouy01@foss.arm.com:587/"
-#set smtp_authenticators=${imap_authenticators}
-#set smtp_oauth_refresh_command=${imap_oauth_refresh_command}
 set from=$imap_user
 set use_from=yes
 set spoolfile = "+linux-eng"
 mailboxes +linux-eng +Upstream +Inbox
 set imap_check_subscribed
-set sendmail="/usr/bin/msmtp"
 unset imap_passive
 set imap_keepalive = 300
 set mail_check = 120
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set hide_thread_subject = no
-#set record = "+Sent"
-#set postponed = "+Drafts"
+
+# SMTP-0
+#set smtp_url="smtp://${imap_user}@smtp.office365.com:587/"
+#set smtp_authenticators=${imap_authenticators}
+#set smtp_oauth_refresh_command=${imap_oauth_refresh_command}
+# SMTP-1
+set smtp_url = "smtp://weiouy01@foss.arm.com:587/"
+set sendmail="/usr/bin/msmtp"
 
 #https://neomutt.org/feature/use-threads
 set use_threads=threads sort=reverse-last-date sort_aux=date
@@ -37,7 +38,7 @@ bind pager                      j   next-line
 
 color status brightred white
 
-# sidebar
+# Sidebar
 set sidebar_visible = yes
 set sidebar_width = 15
 macro index gi "<change-folder>=Inbox<enter>"
