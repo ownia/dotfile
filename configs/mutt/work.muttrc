@@ -9,9 +9,8 @@ set smtp_url = "smtp://weiouy01@foss.arm.com:587/"
 #set smtp_oauth_refresh_command=${imap_oauth_refresh_command}
 set from=$imap_user
 set use_from=yes
-#set folder="imaps://imap-mail.outlook.com:993"
 set spoolfile = "+linux-eng"
-mailboxes = "+linux-eng"
+mailboxes +linux-eng +Upstream +Inbox
 set imap_check_subscribed
 set sendmail="/usr/bin/msmtp"
 unset imap_passive
@@ -20,6 +19,8 @@ set mail_check = 120
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set hide_thread_subject = no
+#set record = "+Sent"
+#set postponed = "+Drafts"
 
 #https://neomutt.org/feature/use-threads
 set use_threads=threads sort=reverse-last-date sort_aux=date
@@ -33,3 +34,12 @@ bind pager                      gg  top
 bind pager                      G   bottom
 bind pager                      k   previous-line
 bind pager                      j   next-line
+
+color status brightred white
+
+# sidebar
+set sidebar_visible = yes
+set sidebar_width = 15
+macro index gi "<change-folder>=Inbox<enter>"
+macro index gl "<change-folder>=linux-eng<enter>"
+macro index gu "<change-folder>=Upstream<enter>"
