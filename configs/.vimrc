@@ -433,6 +433,8 @@ nnoremap <leader>s :call AddSignature()<CR>
 let g:fzf_vim = {}
 let g:fzf_vim.preview_window = []
 nnoremap <leader>f :Files!<Cr>
+autocmd VimEnter * command! Windows echo ""
+
 cnoremap <expr> rg getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg'
 " https://github.com/junegunn/fzf.vim/issues/837#issuecomment-1582511811 with some changes
 command! -bang -nargs=* -complete=custom,RgComplete Rg
