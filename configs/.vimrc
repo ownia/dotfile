@@ -213,6 +213,24 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'
 call plug#end()
 
+" tmux
+let g:is_split_pane = -1
+
+function! IsTmuxSplitCached() abort
+  if g:is_split_pane != -1
+    return g:is_split_pane
+  endif
+
+  if empty($TMUX)
+    let g:is_split_pane = 0
+  else
+    let pane_count = str2nr(system("tmux list-panes | wc -l"))
+    let g:is_split_pane = pane_count > 1 ? 1 : 0
+  endif
+
+  return g:is_split_pane
+endfunction
+
 " lightline
 let g:lightline = {
   \ 'active': {
@@ -296,11 +314,13 @@ nnoremap <leader>n :call NERDTreeToggleCustom()<CR>
 "nnoremap <silent> <F2> :TlistOpen<CR>
 
 " tagbar
+let g:tagbar_sort = 0
+
 nmap <F8> :TagbarToggle<CR>
-if !&diff
+
+if !&diff && !IsTmuxSplitCached()
   autocmd FileType *\(^nerdtree\|^help\)\@<! nested :call tagbar#autoopen(0)
 endif
-let g:tagbar_sort = 0
 
 " LeaderF
 "let g:Lf_GtagsAutoGenerate = 1
