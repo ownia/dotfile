@@ -21,6 +21,7 @@ build() {
     #fakeroot debian/rules binary-headers binary-generic binary-perarch skipdbg=false
 
     # fast steps
+    #cp debian/build/build-generic/.config .
     export CC="ccache gcc"
     export CXX="ccache g++"
     make CC="ccache gcc" -j "$(nproc --all)" bindeb-pkg
@@ -33,11 +34,21 @@ reboot() {
     sudo systemctl reboot
 }
 
+# apply $UBUNTU_VERSION/debian.master/config/annotations
+# for slow steps
+annotation() {
+    cd $UBUNTU_VERSION/ || exit
+    fakeroot debian/rules updateconfigs
+    cd ../
+}
+
 main() {
     if [ "$1" = "build" ]; then
         build
     elif [ "$1" = "reboot" ]; then
         reboot
+    elif [ "$1" = "ann" ]; then
+        annotation
     else
         echo "Nah"
     fi
