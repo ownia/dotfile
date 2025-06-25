@@ -474,6 +474,12 @@ nnoremap <leader><F1> :echon
 \ ", + f  - fzf.vim Files\n"
 \ "cs     - under cursor cgn\n"
 \<CR>
+" advanced CTRL-N
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> j pumvisible() ? "\<C-n>" : "j"
+inoremap <expr> k pumvisible() ? "\<C-p>" : "k"
 
 endif
 
