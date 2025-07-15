@@ -349,6 +349,7 @@ let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_diagnostics_highlights_enabled = 0
 let g:lsp_settings_enable_suggestions = 0
 let g:lsp_settings_filetype_python = ['pyright-langserver']
+let g:lsp_use_native_client = 1
 
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
