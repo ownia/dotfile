@@ -36,6 +36,11 @@ config() {
             echo "done"
         fi
     fi
+
+    echo "update neovim"
+    if ln -sf "$PWD"/configs/init.lua ~/.config/nvim/init.lua; then
+        echo "done"
+    fi
 }
 
 main() {
