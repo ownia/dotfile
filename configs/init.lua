@@ -137,6 +137,7 @@ require("lazy").setup({
     config = function()
       require("aerial").setup({
         open_automatic = true,
+        close_automatic_events = { "unsupported" },
         on_attach = function(bufnr)
           vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
           vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
@@ -150,6 +151,49 @@ require("lazy").setup({
     config = function()
       require("fzf-lua").setup({
         'fzf-vim',
+      })
+      vim.keymap.set('n', '<leader>f', require('fzf-lua').files)
+    end,
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    event = "BufReadPost",
+    dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        "neovim/nvim-lspconfig",
+    },
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls",
+          "rust_analyzer",
+          "pyright"
+        }
+      })
+    end,
+  },
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    config = function()
+        require('tiny-inline-diagnostic').setup()
+        vim.diagnostic.config({ virtual_text = false })
+    end
+  },
+  {
+    "dhananjaylatkar/cscope_maps.nvim",
+    config = function()
+      require('cscope_maps').setup({
+        skip_input_prompt = true,
+        prefix = "<C-\\>",
+        cscope = {
+          picker = "fzf-lua",
+          picker_opts = {
+            window_size = 10,
+          }
+        },
+        skip_picker_for_single_result = true,
       })
     end,
   },
