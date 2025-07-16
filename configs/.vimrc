@@ -326,7 +326,7 @@ endif
 "let g:Lf_GtagsAutoGenerate = 1
 
 " hlsearch
-nnoremap <silent> <F3> :noh<CR>
+nnoremap <silent> <Esc> :nohlsearch<CR>
 
 " PreviewMarkdown
 function! PreviewMarkdown()
@@ -462,7 +462,6 @@ nnoremap <leader>w :wqall<CR>
 " https://vi.stackexchange.com/a/18895
 nnoremap <silent> cs :let @/=expand('<cword>')<cr>cgn
 nnoremap <leader><F1> :echon
-\ "F3     - stop the highlighting\n"
 \ "F4     - preview markdown file\n"
 \ "F8     - toggle tagbar\n"
 \ ", + gb - git blame cursor line\n"
