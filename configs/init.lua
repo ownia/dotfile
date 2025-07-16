@@ -22,13 +22,17 @@ vim.opt.listchars = { tab = ">-", trail = "·", space = "." }
 vim.o.breakindent = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.g.loaded_netrw = true
+vim.g.loaded_netrwPlugin = true
+vim.opt.termguicolors = true
 
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', '<cmd>:qall<CR>')
+vim.keymap.set('n', '<leader>w', '<cmd>:wqall<CR>')
 
 -- https://github.com/neovim/neovim/issues/16339#issuecomment-1348133829
 local ignore_buftype = { "quickfix", "nofile", "help" }
@@ -38,7 +42,6 @@ local function run()
     return
   end
   if vim.tbl_contains(ignore_filetype, vim.bo.filetype) then
-    -- reset cursor to first line
     vim.cmd[[normal! gg]]
     return
   end
@@ -99,7 +102,7 @@ require("lazy").setup({
         },
         sections = {
           lualine_a = {'mode'},
-          lualine_b = {'branch', 'filename', 'diagnostics'},
+          lualine_b = {'FugitiveHead', 'filename', 'diagnostics'},
           lualine_c = {'location', 'filetype'},
           lualine_x = {},
           lualine_y = {},
@@ -170,6 +173,15 @@ require("lazy").setup({
           "pyright"
         }
       })
+      vim.lsp.config('lua_ls', {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            }
+          }
+        }
+      })
     end,
   },
   {
@@ -177,8 +189,14 @@ require("lazy").setup({
     event = "VeryLazy",
     priority = 1000,
     config = function()
-        require('tiny-inline-diagnostic').setup()
-        vim.diagnostic.config({ virtual_text = false })
+      require('tiny-inline-diagnostic').setup({
+        signs = {
+          left = "",
+          right = "",
+          arrow = "   ",
+        }
+      })
+      vim.diagnostic.config({ virtual_text = false })
     end
   },
   {
@@ -194,6 +212,58 @@ require("lazy").setup({
           }
         },
         skip_picker_for_single_result = true,
+      })
+    end,
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          width = 40,
+        },
+        renderer = {
+          icons = {
+            show = {
+              file = false,
+              folder = false,
+              folder_arrow = true,
+              git = false,
+              modified = false,
+              hidden = false,
+              diagnostics = false,
+              bookmarks = false,
+            }
+          }
+        }
+      })
+      local function nvim_tree_toggle_custom()
+        local view = require("nvim-tree.view")
+        if view.is_visible() then
+          if vim.bo.filetype == "NvimTree" then
+            require("nvim-tree.api").tree.close()
+          else
+            require("nvim-tree.api").tree.focus()
+          end
+        elseif vim.bo.filetype == "NvimTree" then
+          require("nvim-tree.api").tree.toggle()
+        else
+          require("nvim-tree.api").tree.find_file({ open = true, focus = true })
+        end
+      end
+      vim.keymap.set("n", "<leader>n", nvim_tree_toggle_custom, { noremap = true, silent = true })
+    end,
+  },
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      require("nvim-tree").setup({
+        vim.keymap.set('n', '<leader>gb', function()
+          vim.cmd('Git blame')
+          vim.cmd('normal i gg')
+        end),
       })
     end,
   },
