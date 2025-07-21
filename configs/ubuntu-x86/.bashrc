@@ -100,6 +100,7 @@ alias dtb='dtc -I dts -O dtb'
 alias tmux='tmux -2'
 alias bat='batcat --style=plain'
 alias xclip='xclip -selection clipboard'
+alias nv='nvim'
 
 STORAGE_0="/data_nvme0n1"
 alias shrinkwrap="$STORAGE_0/shrinkwrap/shrinkwrap/shrinkwrap"
@@ -134,5 +135,7 @@ bind -x '"\C-z": _fg'
 
 # toolchain
 export PATH=/data_nvme0n1/prebulit/*/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 # fzf
 export FZF_DEFAULT_COMMAND='fdfind --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+. "$HOME/.cargo/env"
