@@ -80,7 +80,7 @@ require("lazy").setup({
     priority = 1000,
     config = function()
       require("tokyonight").setup({
-        style = "night",
+        style = "moon",
         transparent = true,
         styles = {
           comments = { italic = false },
@@ -209,36 +209,16 @@ require("lazy").setup({
           picker = "fzf-lua",
           picker_opts = {
             window_size = 10,
-          }
+          },
+          skip_picker_for_single_result = true,
         },
-        skip_picker_for_single_result = true,
       })
     end,
   },
   {
     "nvim-tree/nvim-tree.lua",
-    version = "*",
     lazy = false,
-    config = function()
-      require("nvim-tree").setup({
-        view = {
-          width = 40,
-        },
-        renderer = {
-          icons = {
-            show = {
-              file = false,
-              folder = false,
-              folder_arrow = true,
-              git = false,
-              modified = false,
-              hidden = false,
-              diagnostics = false,
-              bookmarks = false,
-            }
-          }
-        }
-      })
+    init = function()
       local function nvim_tree_toggle_custom()
         local view = require("nvim-tree.view")
         if view.is_visible() then
@@ -255,16 +235,41 @@ require("lazy").setup({
       end
       vim.keymap.set("n", "<leader>n", nvim_tree_toggle_custom, { noremap = true, silent = true })
     end,
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          width = 40,
+        },
+        renderer = {
+          icons = {
+            show = {
+              file = false,
+              folder = false,
+              folder_arrow = true,
+              git = false,
+              modified = false,
+              hidden = false,
+              diagnostics = false,
+              bookmarks = false,
+            },
+            glyphs = {
+              folder = {
+                arrow_closed = "▸",
+                arrow_open = "▾",
+              }
+            }
+          }
+        }
+      })
+    end,
   },
   {
     "tpope/vim-fugitive",
     config = function()
-      require("nvim-tree").setup({
-        vim.keymap.set('n', '<leader>gb', function()
-          vim.cmd('Git blame')
-          vim.cmd('normal i gg')
-        end),
-      })
+      vim.keymap.set('n', '<leader>gb', function()
+        vim.cmd('Git blame')
+        vim.cmd('normal i gg')
+      end)
     end,
   },
 })
