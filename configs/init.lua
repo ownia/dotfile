@@ -25,6 +25,8 @@ vim.o.smartcase = true
 vim.g.loaded_netrw = true
 vim.g.loaded_netrwPlugin = true
 vim.opt.termguicolors = true
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
@@ -86,6 +88,14 @@ require("lazy").setup({
           comments = { italic = false },
           keywords = { italic = false },
         },
+        on_highlights = function(hl, colors)
+          hl.LineNr = {
+            fg = "#505878",
+          }
+          hl.CursorLineNr = {
+            fg = colors.yellow,
+          }
+        end,
       })
       vim.cmd([[colorscheme tokyonight]])
     end,
@@ -193,7 +203,7 @@ require("lazy").setup({
         signs = {
           left = "",
           right = "",
-          arrow = "   ",
+          arrow = " <- ",
         }
       })
       vim.diagnostic.config({ virtual_text = false })
