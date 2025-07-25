@@ -36,37 +36,25 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', '<cmd>:qall<CR>')
 vim.keymap.set('n', '<leader>w', '<cmd>:wqall<CR>')
 
--- https://github.com/neovim/neovim/issues/16339#issuecomment-1348133829
-local ignore_buftype = { "quickfix", "nofile", "help" }
-local ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" }
-local function run()
-  if vim.tbl_contains(ignore_buftype, vim.bo.buftype) then
-    return
-  end
-  if vim.tbl_contains(ignore_filetype, vim.bo.filetype) then
-    vim.cmd[[normal! gg]]
-    return
-  end
-  if vim.fn.line(".") > 1 then
-    return
-  end
-  local last_line = vim.fn.line([['"]])
-  local buff_last_line = vim.fn.line("$")
-  if last_line > 0 and last_line <= buff_last_line then
-    local win_last_line = vim.fn.line("w$")
-    local win_first_line = vim.fn.line("w0")
-    if win_last_line == buff_last_line then
-      vim.cmd[[normal! g`"]]
-    elseif buff_last_line - last_line > ((win_last_line - win_first_line) / 2) - 1 then
-      vim.cmd[[normal! g`"zz]]
-    else
-      vim.cmd[[normal! G'"<c-e>]]
-    end
-  end
-end
-vim.api.nvim_create_autocmd({'BufWinEnter', 'FileType'}, {
-  group    = vim.api.nvim_create_augroup('nvim-lastplace', {}),
-  callback = run
+-- https://github.com/neovim/neovim/issues/16339#issuecomment-1457394370
+vim.api.nvim_create_autocmd('BufRead', {
+  callback = function(opts)
+    vim.api.nvim_create_autocmd('BufWinEnter', {
+      once = true,
+      buffer = opts.buf,
+      callback = function()
+        local ft = vim.bo[opts.buf].filetype
+        local last_known_line = vim.api.nvim_buf_get_mark(opts.buf, '"')[1]
+        if
+          not (ft:match('commit') or ft:match('rebase'))
+          and last_known_line > 1
+          and last_known_line <= vim.api.nvim_buf_line_count(opts.buf)
+        then
+          vim.api.nvim_feedkeys([[g`"]], 'nx', false)
+        end
+      end,
+    })
+  end,
 })
 
 require("lazy").setup({
