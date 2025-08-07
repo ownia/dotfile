@@ -37,7 +37,9 @@ config() {
         if [ -d ~/.config/ghostty/ ]; then
             echo "update ghostty config"
             if ln -sf "$PWD"/configs/ghostty/.ghostty ~/.config/ghostty/config; then
-                echo "done"
+                if ln -sf "$PWD"/configs/ghostty/.ghostty_macos ~/.config/ghostty/optional_config; then
+                    echo "done"
+                fi
             fi
         fi
     elif [ "$KERNEL" = "Linux" ] && [ "$ARCH" = "x86_64" ] && [ -f /etc/os-release ]; then
@@ -57,7 +59,9 @@ config() {
                 if [ -d ~/.config/ghostty/ ]; then
                     echo "update ghostty config"
                     if ln -sf "$PWD"/configs/ghostty/.ghostty ~/.config/ghostty/config; then
-                        echo "done"
+                        if ln -sf "$PWD"/configs/ghostty/.ghostty_ubuntu ~/.config/ghostty/optional_config; then
+                            echo "done"
+                        fi
                     fi
                 fi
                 ;;
