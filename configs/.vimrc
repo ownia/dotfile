@@ -510,4 +510,4 @@ set noshowmode
 if has('unnamedplus')
   set clipboard=unnamedplus
 endif
-autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType cpp,sh setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
