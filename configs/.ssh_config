@@ -22,3 +22,8 @@ Host cix
     ProxyCommand bash -c "exec nc \$(arp -n | rg 00:48:54:20:0e:3a | awk '{ print \$1 }') 22"
     User root
     ForwardX11 yes
+
+Host cix2
+    HostName 10.169.38.28
+    User root
+    ForwardX11 yes
