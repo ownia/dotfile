@@ -511,3 +511,7 @@ if has('unnamedplus')
   set clipboard=unnamedplus
 endif
 autocmd FileType cpp,sh setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+" https://github.com/ghostty-org/ghostty/discussions/8170
+if has('mouse_sgr')
+  set ttymouse=sgr
+endif
