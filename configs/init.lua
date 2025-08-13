@@ -168,8 +168,17 @@ require("lazy").setup({
         ensure_installed = {
           "lua_ls",
           "rust_analyzer",
-          "pyright"
+          "pyright",
         }
+      })
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(event)
+          local opts = { buffer = event.buf }
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+        end,
       })
       vim.lsp.config('lua_ls', {
         settings = {
@@ -268,6 +277,19 @@ require("lazy").setup({
         vim.cmd('Git blame')
         vim.cmd('normal i gg')
       end)
+    end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      require("lint").linters_by_ft = {
+        python = { 'pylint' },
+      }
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          require("lint").try_lint()
+        end,
+      })
     end,
   },
 })
