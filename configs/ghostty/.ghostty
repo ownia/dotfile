@@ -21,13 +21,11 @@ cursor-color = #c7c7c7
 selection-background = #c6dcfc
 selection-foreground = #000000
 
+# Style
 bold-is-bright = true
 window-theme = dark
-macos-titlebar-style = tabs
 cursor-style = block
 title = " "
-
-# Style
 mouse-hide-while-typing = true
 app-notifications = no-clipboard-copy
 
