@@ -31,6 +31,25 @@ if g:os == 'mac' || g:version > '4'
 
 let mapleader = ","
 
+" Deploy vim-plug
+call plug#begin('~/.vim/plugged')
+  Plug 'itchyny/lightline.vim'
+  Plug 'preservim/nerdtree'
+  "Plug 'vim-scripts/taglist.vim'
+  Plug 'preservim/tagbar'
+  "Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+  Plug 'rust-lang/rust.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'tpope/vim-fugitive'
+  Plug 'halkn/lightline-lsp'
+  Plug 'farmergreg/vim-lastplace'
+  "Plug 'dstein64/vim-startuptime'
+  Plug 'bfrg/vim-c-cpp-modern'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
+call plug#end()
+
 " https://cscope.sourceforge.net/cscope_maps.vim
 if has("cscope")
 
@@ -181,37 +200,6 @@ if has("cscope")
     "set ttimeoutlen=100
 
 endif
-
-" Install vim-plug if not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
-" Run PlugInstall if there are missing plugins
-"
-"autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-"  \| PlugInstall --sync | source $MYVIMRC
-"\| endif
-
-" Deploy vim-plug
-call plug#begin('~/.vim/plugged')
-  Plug 'itchyny/lightline.vim'
-  Plug 'preservim/nerdtree'
-  "Plug 'vim-scripts/taglist.vim'
-  Plug 'preservim/tagbar'
-  "Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-  Plug 'rust-lang/rust.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'mattn/vim-lsp-settings'
-  Plug 'tpope/vim-fugitive'
-  Plug 'halkn/lightline-lsp'
-  Plug 'farmergreg/vim-lastplace'
-  "Plug 'dstein64/vim-startuptime'
-  Plug 'bfrg/vim-c-cpp-modern'
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
-call plug#end()
 
 " tmux
 let g:is_split_pane = -1
