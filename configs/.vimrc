@@ -25,7 +25,7 @@ if g:os == 'mac'
   set clipboard=unnamed
 endif
 
-"" Generic platform config
+"" Plugins
 
 if g:os == 'mac' || g:version > '4'
 
@@ -48,6 +48,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'bfrg/vim-c-cpp-modern'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
+  Plug 'keysmashes/vim-lilypond', { 'on': [] }
 call plug#end()
 
 " https://cscope.sourceforge.net/cscope_maps.vim
@@ -471,9 +472,23 @@ inoremap <expr> k pumvisible() ? "\<C-p>" : "k"
 
 endif
 
-" Config
-set nocompatible
+"" Syntax
 syntax on
+highlight ModeMsg ctermfg=lightblue
+highlight Comment ctermfg=red
+highlight TabSpace ctermfg=darkgrey
+au BufRead,BufNewFile * match TabSpace /\t\| /
+highlight! link DiffText ToDo
+" https://gitlab.com/lilypond/lilypond/-/tree/master/vim
+augroup Lilypond
+  autocmd!
+  autocmd FileType lilypond source ~/.vim/plugged/vim-lilypond/syntax/lilypond-words.vim
+  autocmd FileType lilypond source ~/.vim/plugged/vim-lilypond/syntax/lilypond.vim
+  autocmd FileType lilypond source ~/.vim/plugged/vim-lilypond/indent/lilypond.vim
+augroup END
+
+"" Config
+set nocompatible
 set backspace=indent,eol,start
 set number
 set hls
@@ -481,11 +496,6 @@ set mouse=a
 set listchars=trail:.,tab:>-,space:.
 set list
 set background=dark
-highlight ModeMsg ctermfg=lightblue
-highlight Comment ctermfg=red
-highlight TabSpace ctermfg=darkgrey
-au BufRead,BufNewFile * match TabSpace /\t\| /
-highlight! link DiffText ToDo
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
