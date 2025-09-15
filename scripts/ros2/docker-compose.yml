@@ -1,0 +1,27 @@
+services:
+  ros2_gui:
+    image: ros2:arm64_rolling
+    container_name: ros2_gui
+    environment:
+      XDG_SESSION_TYPE: "x11"
+      DISPLAY: "${DISPLAY}"
+      QT_X11_NO_MITSHM: "1"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+
+  talker:
+    image: ros2:arm64_rolling
+    container_name: talker
+    command: ros2 run demo_nodes_cpp talker
+    depends_on:
+      - ros2_gui
+
+  listener:
+    image: ros2:arm64_rolling
+    container_name: listener
+    command: ros2 run demo_nodes_cpp listener
+    depends_on:
+      - talker
