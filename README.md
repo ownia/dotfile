@@ -1,5 +1,5 @@
 # dotfile
 
 ```
-./dotfile.sh config
+./dotfile.sh -h
 ```
