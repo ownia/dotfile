@@ -315,7 +315,7 @@ endif
 "let g:Lf_GtagsAutoGenerate = 1
 
 " hlsearch
-nnoremap <silent> <Esc> :nohlsearch<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " PreviewMarkdown
 function! PreviewMarkdown()
