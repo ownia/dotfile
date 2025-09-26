@@ -22,6 +22,20 @@ build:
       ENABLE_SME_FOR_SWD: 1
       ENABLE_SME2_FOR_NS: 1
 
+  acpica:
+    repo:
+      remote: https://github.com/acpica/acpica.git
+      revision: R2025_04_04
+
+  edk2:
+    repo:
+      edk2:
+        remote: https://github.com/tianocore/edk2.git
+        revision: 8310dfa9f49bf4eff96a36291bc0028be920f60b
+      edk2-platforms:
+        remote: https://github.com/tianocore/edk2-platforms.git
+        revision: 996c79ee0ed5236a0449b20f2bec4162ab4185fd
+
 run:
   params:
     -C cluster0.memory_tagging_support_level: 2
