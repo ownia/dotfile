@@ -7,3 +7,4 @@ font-size = "12"
 # Style
 macos-titlebar-style = transparent
 window-padding-balance = true
+macos-titlebar-proxy-icon = hidden
