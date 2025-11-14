@@ -479,6 +479,9 @@ highlight Comment ctermfg=red
 highlight TabSpace ctermfg=darkgrey
 au BufRead,BufNewFile * match TabSpace /\t\| /
 highlight! link DiffText ToDo
+" switch Pmenu and PmenuSel
+highlight Pmenu ctermfg=242 ctermbg=0 guibg=DarkGrey
+highlight PmenuSel ctermfg=0 ctermbg=13 guibg=Magenta
 " https://gitlab.com/lilypond/lilypond/-/tree/master/vim
 augroup Lilypond
   autocmd!
