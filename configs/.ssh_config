@@ -32,3 +32,7 @@ Host cix2
     HostName 10.169.38.28
     User root
     ForwardX11 yes
+
+Host vm
+    HostName 172.16.7.138
+    User ownia
