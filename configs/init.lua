@@ -27,6 +27,7 @@ vim.g.loaded_netrwPlugin = true
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
+vim.opt.shortmess:append("I")
 
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'

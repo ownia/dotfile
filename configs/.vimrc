@@ -516,3 +516,4 @@ autocmd FileType cpp,sh setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 if has('mouse_sgr')
   set ttymouse=sgr
 endif
+set shortmess+=I
