@@ -7,7 +7,7 @@ concrete: true
 
 layers:
   - FVP_Base_RevC-2xAEMvA-base.yaml
-  - arch/v9.3.yaml
+  - arch/v9.5.yaml
   - tfa-base.yaml
   - dt-base.yaml
   - ns-edk2-base.yaml
@@ -25,16 +25,16 @@ build:
   acpica:
     repo:
       remote: https://github.com/acpica/acpica.git
-      revision: R2025_04_04
+      revision: 20250807
 
   edk2:
     repo:
       edk2:
         remote: https://github.com/tianocore/edk2.git
-        revision: 8310dfa9f49bf4eff96a36291bc0028be920f60b
+        revision: 8b3b2a64886f6ce6a987421668d1beb8ddff1e49
       edk2-platforms:
         remote: https://github.com/tianocore/edk2-platforms.git
-        revision: 996c79ee0ed5236a0449b20f2bec4162ab4185fd
+        revision: 17893ae84e968214ee6db15bf7502531d9034260
 
 run:
   params:
