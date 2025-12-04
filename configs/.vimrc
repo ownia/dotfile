@@ -226,7 +226,7 @@ let g:lightline = {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitstatus', 'filename', 'modified' ],
   \             [ 'lsp_errors', 'lsp_warnings', 'lsp_ok', ],
-  \             [ 'lineinfo', 'filetype' ] ],
+  \             [ 'lineinfo', 'filetype', 'searchcount' ] ],
   \   'right': [ ],
   \ },
   \ 'inactive': {
@@ -239,6 +239,7 @@ let g:lightline = {
   \   'mode': 'LightlineMode',
   \   'filename': 'LightlineFilename',
   \   'gitstatus': 'FugitiveStatusline',
+  \   'searchcount': 'LightlineSearchCount',
   \ },
   \ 'component_expand': {
   \   'lsp_warnings': 'lightline_lsp#warnings',
@@ -264,6 +265,27 @@ function! LightlineMode()
   return fname =~# '^__Tagbar__' ? 'Tagbar' :
        \ fname =~# 'NERD_tree' ? 'NERDTree' :
        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! LightlineSearchCount() abort
+  let result = searchcount(#{recompute: 1, maxcount: 9999})
+  if empty(result) || result.total ==# 0
+    return ''
+  endif
+  if result.incomplete ==# 1     " timed out
+    return printf(' [?/??]')
+  elseif result.incomplete ==# 2 " max count exceeded
+    if result.total > result.maxcount &&
+    \  result.current > result.maxcount
+      return printf(' [>%d/>%d]',
+      \		    result.current, result.total)
+    elseif result.total > result.maxcount
+      return printf(' [%d/>%d]',
+      \		    result.current, result.total)
+    endif
+  endif
+  return printf(' [%d/%d]',
+  \		result.current, result.total)
 endfunction
 
 " NERDTree
