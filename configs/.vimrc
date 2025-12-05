@@ -49,6 +49,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'keysmashes/vim-lilypond', { 'on': [] }
+  Plug 'andymass/vim-matchup'
 call plug#end()
 
 " https://cscope.sourceforge.net/cscope_maps.vim
@@ -447,6 +448,12 @@ let g:fzf_vim.preview_window = []
 nnoremap <leader>f :Files!<Cr>
 autocmd VimEnter * command! Windows echo ""
 
+" vim-matchup
+let g:matchup_matchparen_offscreen = {
+  \ 'method': 'popup',
+  \ 'fullwidth': 1,
+  \ }
+
 cnoremap <expr> rg getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg'
 " https://github.com/junegunn/fzf.vim/issues/837#issuecomment-1582511811 with some changes
 command! -bang -nargs=* -complete=custom,RgComplete Rg
@@ -504,6 +511,8 @@ highlight! link DiffText ToDo
 " switch Pmenu and PmenuSel
 highlight Pmenu ctermfg=242 ctermbg=0 guibg=DarkGrey
 highlight PmenuSel ctermfg=0 ctermbg=13 guibg=Magenta
+" vim-matchup
+highlight MatchWord ctermfg=red guifg=blue cterm=underline gui=underline
 " https://gitlab.com/lilypond/lilypond/-/tree/master/vim
 augroup Lilypond
   autocmd!
