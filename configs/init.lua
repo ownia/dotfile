@@ -138,6 +138,9 @@ require("lazy").setup({
     'stevearc/aerial.nvim',
     config = function()
       require("aerial").setup({
+        layout = {
+          width = 40,
+        },
         open_automatic = true,
         close_automatic_events = { "unsupported" },
         on_attach = function(bufnr)
