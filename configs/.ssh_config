@@ -4,7 +4,7 @@
 Include ~/.orbstack/ssh/config
 
 Host ubuntu
-    HostName 10.169.38.63
+    HostName A015270
     User weiouy01
 
 Host radax
