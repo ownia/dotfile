@@ -17,8 +17,7 @@ Host rpi5
     User ownia
 
 Host debian
-    HostName 10.169.38.28
-    ProxyCommand bash -c "exec nc \$(arp -n | rg f6:75:99:ea:fe:1b | awk '{ print \$1 }') 22"
+    HostName 10.168.14.55
     User root
     ForwardX11 yes
 
@@ -35,4 +34,12 @@ Host cix2
 
 Host vm
     HostName 172.16.7.138
+    User ownia
+
+Host fnos
+    HostName 10.168.14.52
+    User ownia
+
+Host ugreen
+    HostName 10.168.14.68
     User ownia
