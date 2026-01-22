@@ -1,0 +1,7 @@
+gui:
+  statusPanelView: allBranchesLog
+
+git:
+  commit:
+    signOff: true
+  autoFetch: false

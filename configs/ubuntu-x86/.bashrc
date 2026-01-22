@@ -101,6 +101,7 @@ alias tmux='tmux -2'
 alias bat='batcat --style=plain'
 alias xclip='xclip -selection clipboard'
 alias nv='nvim'
+alias lg='lazygit'
 
 STORAGE_0="/data_nvme0n1"
 alias shrinkwrap="$STORAGE_0/shrinkwrap/shrinkwrap/shrinkwrap"

@@ -117,6 +117,7 @@ PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 alias tmux="tmux -u -2"
 alias git='LANG=en_US git'
 alias nv='nvim'
+alias lg='lazygit'
 
 # Homebrew
 export HOMEBREW_FORCE_BREWED_GIT="1"

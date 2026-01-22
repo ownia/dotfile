@@ -183,6 +183,8 @@ configure_macos() {
     else
         log_warning "Ghostty config directory not found, skipping Ghostty configuration"
     fi
+
+    create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml" "Lazygit config"
 }
 
 configure_linux() {
@@ -222,6 +224,8 @@ configure_ubuntu() {
     else
         log_warning "Ghostty config directory not found, skipping Ghostty configuration"
     fi
+
+    create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml" "Lazygit config"
 }
 
 configure_debian() {
