@@ -344,10 +344,12 @@ nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 function! PreviewMarkdown()
   let l:path=expand('%:p')
   silent execute "!echo ".l:path." > ~/.lastpreview.log"
-  :execute "tab :terminal"
+  let l:cmd = ['sh', '-c', 'glow -p ' . shellescape(l:path)]
+  tabnew
+  call term_start(l:cmd, {'term_finish': 'close', 'curwin': 1})
 endfunction
 
-nmap <F4> : call PreviewMarkdown()<CR>clear<CR>glow -p $(cat ~/.lastpreview.log)<CR>
+nnoremap <F4> :call PreviewMarkdown()<CR>
 
 " vim-lsp and vim-lsp-settings
 let g:lsp_settings = {
