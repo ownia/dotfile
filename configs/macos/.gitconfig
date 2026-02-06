@@ -8,6 +8,7 @@
 	required = true
 [alias]
 	all = "!f() { ls -R -d */.git | sed s,/.git,, | xargs -P10 -I{} git -C {} $1; }; f"
+	mlog = "!$HOME/code/dotfile/scripts/git/multi-git-log.sh"
 [core]
 	abbrev = 12
 	pager = less --mouse -FRX
