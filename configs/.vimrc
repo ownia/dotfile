@@ -50,6 +50,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'keysmashes/vim-lilypond', { 'on': [] }
   Plug 'andymass/vim-matchup'
+  Plug 'wellle/context.vim'
 call plug#end()
 
 " https://cscope.sourceforge.net/cscope_maps.vim
@@ -455,6 +456,10 @@ let g:matchup_matchparen_offscreen = {
   \ 'method': 'popup',
   \ 'fullwidth': 1,
   \ }
+
+" context.vim
+let g:context_enabled = 1
+let g:context_highlight_tag = '<hide>'
 
 cnoremap <expr> rg getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg'
 " https://github.com/junegunn/fzf.vim/issues/837#issuecomment-1582511811 with some changes
