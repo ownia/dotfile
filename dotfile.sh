@@ -198,6 +198,9 @@ configure_linux() {
             debian)
                 configure_debian
                 ;;
+            arch)
+                configure_arch
+                ;;
             *)
                 log_warning "Unsupported Linux distribution: $DISTRO_ID"
                 ;;
@@ -232,6 +235,19 @@ configure_debian() {
     log_info "Configuring Debian-specific settings"
 
     create_symlink "$CONFIGS_DIR/debian/.bashrc" "$HOME/.bashrc" "Bash configuration"
+}
+
+configure_arch() {
+    log_info "Configuring Arch-specific settings"
+
+    if [ -d ~/.config/ghostty/ ]; then
+        create_symlink "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
+        create_symlink "$CONFIGS_DIR/ghostty/.ghostty_arch" "$HOME/.config/ghostty/optional_config" "Ghostty Arch config"
+    else
+        log_warning "Ghostty config directory not found, skipping Ghostty configuration"
+    fi
+
+    create_symlink "$CONFIGS_DIR/archlinux/pacman.conf" "/etc/pacman.conf" "Pacman configuration"
 }
 
 parse_arguments() {
