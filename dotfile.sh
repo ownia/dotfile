@@ -199,7 +199,7 @@ configure_linux() {
                 configure_debian
                 ;;
             arch)
-                configure_arch
+                configure_archlinux
                 ;;
             *)
                 log_warning "Unsupported Linux distribution: $DISTRO_ID"
@@ -237,7 +237,7 @@ configure_debian() {
     create_symlink "$CONFIGS_DIR/debian/.bashrc" "$HOME/.bashrc" "Bash configuration"
 }
 
-configure_arch() {
+configure_archlinux() {
     log_info "Configuring Arch-specific settings"
 
     if [ -d ~/.config/ghostty/ ]; then
@@ -248,6 +248,15 @@ configure_arch() {
     fi
 
     create_symlink "$CONFIGS_DIR/archlinux/pacman.conf" "/etc/pacman.conf" "Pacman configuration"
+    create_symlink "$CONFIGS_DIR/archlinux/makepkg.conf" "/etc/makepkg.conf" "makepkg configuration"
+
+    if [ -d ~/.config/ibus/rime/ ]; then
+        create_symlink "$CONFIGS_DIR/rime/default.custom.yaml" "$HOME/.config/ibus/rime/default.custom.yaml" "IBus Rime config"
+    else
+        log_warning "IBus Rime config directory not found, skipping Rime configuration"
+    fi
+
+    create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml" "Lazygit config"
 }
 
 parse_arguments() {
