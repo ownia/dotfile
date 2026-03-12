@@ -217,6 +217,7 @@ configure_ubuntu() {
 
     if [ -d ~/.config/ibus/rime/ ]; then
         create_symlink "$CONFIGS_DIR/rime/default.custom.yaml" "$HOME/.config/ibus/rime/default.custom.yaml" "IBus Rime config"
+        create_symlink "$CONFIGS_DIR/rime/luna_pinyin.custom.yaml" "$HOME/.config/ibus/rime/luna_pinyin.custom.yaml" "IBus Rime config"
     else
         log_warning "IBus Rime config directory not found, skipping Rime configuration"
     fi
@@ -252,6 +253,7 @@ configure_archlinux() {
 
     if [ -d ~/.config/ibus/rime/ ]; then
         create_symlink "$CONFIGS_DIR/rime/default.custom.yaml" "$HOME/.config/ibus/rime/default.custom.yaml" "IBus Rime config"
+        create_symlink "$CONFIGS_DIR/rime/luna_pinyin.custom.yaml" "$HOME/.config/ibus/rime/luna_pinyin.custom.yaml" "IBus Rime config"
     else
         log_warning "IBus Rime config directory not found, skipping Rime configuration"
     fi
