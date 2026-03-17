@@ -241,6 +241,8 @@ configure_debian() {
 configure_archlinux() {
     log_info "Configuring Arch-specific settings"
 
+    create_symlink "$CONFIGS_DIR/archlinux/.bashrc" "$HOME/.bashrc" "Bash configuration"
+
     if [ -d ~/.config/ghostty/ ]; then
         create_symlink "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
         create_symlink "$CONFIGS_DIR/ghostty/.ghostty_arch" "$HOME/.config/ghostty/optional_config" "Ghostty Arch config"
