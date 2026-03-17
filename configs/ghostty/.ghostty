@@ -29,6 +29,7 @@ title = " "
 mouse-hide-while-typing = true
 app-notifications = no-clipboard-copy
 bell-features = "no-system,no-audio,no-attention,no-title,no-border"
+maximize = true
 
 # Optional
 config-file = ?optional_config
