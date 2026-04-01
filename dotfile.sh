@@ -108,6 +108,21 @@ create_symlink() {
     return 1
 }
 
+create_symlink_check() {
+    local check="$1"
+    local source_file="$2"
+    local target_path="$3"
+    local description="$4"
+
+    log_verbose "Checking $check $source_file $target_path $description"
+    if [ ! -d "$check" ]; then
+        log_warning "$check not found, skipping \"$description\""
+        return 1
+    fi
+
+    create_symlink "$source_file" "$target_path" "$description"
+}
+
 install_config() {
     local source_file="$1"
     local target_path="$2"
@@ -177,12 +192,8 @@ config() {
 configure_macos() {
     log_info "Configuring macOS-specific settings"
 
-    if [ -d ~/.config/ghostty/ ]; then
-        create_symlink "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
-        create_symlink "$CONFIGS_DIR/ghostty/.ghostty_macos" "$HOME/.config/ghostty/optional_config" "Ghostty macOS config"
-    else
-        log_warning "Ghostty config directory not found, skipping Ghostty configuration"
-    fi
+    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
+    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty_macos" "$HOME/.config/ghostty/optional_config" "Ghostty macOS config"
 
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml" "Lazygit config"
 }
@@ -215,19 +226,11 @@ configure_ubuntu() {
 
     create_symlink "$CONFIGS_DIR/ubuntu-x86/.bashrc" "$HOME/.bashrc" "Bash configuration"
 
-    if [ -d ~/.config/ibus/rime/ ]; then
-        create_symlink "$CONFIGS_DIR/rime/default.custom.yaml" "$HOME/.config/ibus/rime/default.custom.yaml" "IBus Rime config"
-        create_symlink "$CONFIGS_DIR/rime/luna_pinyin.custom.yaml" "$HOME/.config/ibus/rime/luna_pinyin.custom.yaml" "IBus Rime config"
-    else
-        log_warning "IBus Rime config directory not found, skipping Rime configuration"
-    fi
+    create_symlink_check "$HOME/.config/ibus/rime" "$CONFIGS_DIR/rime/default.custom.yaml" "$HOME/.config/ibus/rime/default.custom.yaml" "IBus Rime config"
+    create_symlink_check "$HOME/.config/ibus/rime" "$CONFIGS_DIR/rime/luna_pinyin.custom.yaml" "$HOME/.config/ibus/rime/luna_pinyin.custom.yaml" "IBus Rime config"
 
-    if [ -d ~/.config/ghostty/ ]; then
-        create_symlink "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
-        create_symlink "$CONFIGS_DIR/ghostty/.ghostty_ubuntu" "$HOME/.config/ghostty/optional_config" "Ghostty Ubuntu config"
-    else
-        log_warning "Ghostty config directory not found, skipping Ghostty configuration"
-    fi
+    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
+    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty_ubuntu" "$HOME/.config/ghostty/optional_config" "Ghostty Ubuntu config"
 
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml" "Lazygit config"
 }
@@ -243,22 +246,14 @@ configure_archlinux() {
 
     create_symlink "$CONFIGS_DIR/archlinux/.bashrc" "$HOME/.bashrc" "Bash configuration"
 
-    if [ -d ~/.config/ghostty/ ]; then
-        create_symlink "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
-        create_symlink "$CONFIGS_DIR/ghostty/.ghostty_arch" "$HOME/.config/ghostty/optional_config" "Ghostty Arch config"
-    else
-        log_warning "Ghostty config directory not found, skipping Ghostty configuration"
-    fi
+    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
+    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty_ubuntu" "$HOME/.config/ghostty/optional_config" "Ghostty Arch config"
 
     create_symlink "$CONFIGS_DIR/archlinux/pacman.conf" "/etc/pacman.conf" "Pacman configuration"
     create_symlink "$CONFIGS_DIR/archlinux/makepkg.conf" "/etc/makepkg.conf" "makepkg configuration"
 
-    if [ -d ~/.config/ibus/rime/ ]; then
-        create_symlink "$CONFIGS_DIR/rime/default.custom.yaml" "$HOME/.config/ibus/rime/default.custom.yaml" "IBus Rime config"
-        create_symlink "$CONFIGS_DIR/rime/luna_pinyin.custom.yaml" "$HOME/.config/ibus/rime/luna_pinyin.custom.yaml" "IBus Rime config"
-    else
-        log_warning "IBus Rime config directory not found, skipping Rime configuration"
-    fi
+    create_symlink_check "$HOME/.config/ibus/rime" "$CONFIGS_DIR/rime/default.custom.yaml" "$HOME/.config/ibus/rime/default.custom.yaml" "IBus Rime config"
+    create_symlink_check "$HOME/.config/ibus/rime" "$CONFIGS_DIR/rime/luna_pinyin.custom.yaml" "$HOME/.config/ibus/rime/luna_pinyin.custom.yaml" "IBus Rime config"
 
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml" "Lazygit config"
 }
