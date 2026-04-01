@@ -233,6 +233,8 @@ configure_ubuntu() {
     create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty_ubuntu" "$HOME/.config/ghostty/optional_config" "Ghostty Ubuntu config"
 
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml" "Lazygit config"
+
+    create_symlink_check "$HOME/.config/glow/" "$CONFIGS_DIR/glow.yml" "$HOME/.config/glow/glow.yml" "Glow config"
 }
 
 configure_debian() {
