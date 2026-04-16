@@ -194,6 +194,7 @@ configure_macos() {
 
     create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
     create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty_macos" "$HOME/.config/ghostty/optional_config" "Ghostty macOS config"
+    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/cursor_warp.glsl" "$HOME/.config/ghostty/shaders/cursor_warp.glsl" "Ghostty shaders"
 
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml" "Lazygit config"
 }
@@ -231,6 +232,7 @@ configure_ubuntu() {
 
     create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
     create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty_ubuntu" "$HOME/.config/ghostty/optional_config" "Ghostty Ubuntu config"
+    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/cursor_warp.glsl" "$HOME/.config/ghostty/shaders/cursor_warp.glsl" "Ghostty shaders"
 
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml" "Lazygit config"
 

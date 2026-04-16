@@ -8,3 +8,6 @@ font-size = "12"
 macos-titlebar-style = transparent
 window-padding-balance = true
 macos-titlebar-proxy-icon = hidden
+
+# Shader
+custom-shader = ~/.config/ghostty/shaders/cursor_warp.glsl
