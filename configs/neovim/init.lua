@@ -46,8 +46,6 @@ vim.pack.add({
   'https://github.com/stevearc/aerial.nvim',
   'https://github.com/ibhagwan/fzf-lua',
   'https://github.com/neovim/nvim-lspconfig',
-  'https://github.com/mason-org/mason-lspconfig.nvim',
-  'https://github.com/mason-org/mason.nvim',
   'https://github.com/rachartier/tiny-inline-diagnostic.nvim',
   'https://github.com/dhananjaylatkar/cscope_maps.nvim',
   'https://github.com/nvim-tree/nvim-tree.lua',
@@ -126,23 +124,6 @@ require("fzf-lua").setup({
   'fzf-vim',
 })
 
-require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "lua_ls",
-    "rust_analyzer",
-    "pyright",
-  }
-})
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(event)
-    local opts = { buffer = event.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-  end,
-})
 vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
@@ -159,6 +140,7 @@ vim.lsp.config('lua_ls', {
     }
   }
 })
+vim.lsp.enable({ 'lua_ls', 'pyright', 'rust_analyzer', 'clangd', 'bashls' })
 
 require('tiny-inline-diagnostic').setup({
   signs = {
@@ -248,6 +230,21 @@ vim.keymap.set('n', '<leader>gb', function()
   vim.cmd('Git blame')
   vim.cmd('normal i gg')
 end)
-vim.keymap.set("n", "<leader>f", function()
-  vim.lsp.buf.format()
-end)
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local map = function(mode, lhs, rhs, desc)
+      vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+    end
+    map('n', 'K', vim.lsp.buf.hover, 'LSP Hover')
+    map('n', 'gd', vim.lsp.buf.definition, 'Go to definition')
+    map('n', 'gD', vim.lsp.buf.declaration, 'Go to declaration')
+    map('n', 'gi', vim.lsp.buf.implementation, 'Go to implementation')
+    map('n', 'gr', vim.lsp.buf.references, 'References')
+    map('n', '<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
+    map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, 'Code action')
+    map('n', '<leader>f', function()
+      vim.lsp.buf.format({ async = true })
+    end, 'Format buffer')
+  end,
+})
