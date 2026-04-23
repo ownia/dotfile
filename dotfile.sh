@@ -197,6 +197,8 @@ configure_macos() {
     create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/cursor_warp.glsl" "$HOME/.config/ghostty/shaders/cursor_warp.glsl" "Ghostty shaders"
 
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml" "Lazygit config"
+
+    create_symlink_check "$HOME/Library/Containers/app.cyan.markedit" "$CONFIGS_DIR/markedit/markedit-preview.js" "$HOME/Library/Containers/app.cyan.markedit/Data/Documents/scripts/markedit-preview.js" "MarkEdit preview"
 }
 
 configure_linux() {
