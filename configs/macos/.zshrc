@@ -111,7 +111,7 @@ export LANG=en_US.UTF-8
 # [ -f "/Users/ownia/.ghcup/env" ] && source "/Users/ownia/.ghcup/env" # ghcup-env
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:$HOME/.cargo/bin:$HOME/go/bin:/Library/TeX/texbin:/opt/homebrew/opt/python@3/libexec/bin:/opt/homebrew/sbin:/Applications/VMware\ Fusion.app/Contents/Library
+export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:$HOME/.cargo/bin:$HOME/go/bin:/Library/TeX/texbin:/opt/homebrew/sbin:/Applications/VMware\ Fusion.app/Contents/Library
 PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 
 alias tmux="tmux -u -2"
