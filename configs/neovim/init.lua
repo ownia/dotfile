@@ -49,9 +49,9 @@ vim.pack.add({
   'https://github.com/rachartier/tiny-inline-diagnostic.nvim',
   'https://github.com/dhananjaylatkar/cscope_maps.nvim',
   'https://github.com/nvim-tree/nvim-tree.lua',
-  'https://github.com/tpope/vim-fugitive',
   'https://github.com/nvim-treesitter/nvim-treesitter-context',
   'https://github.com/NMAC427/guess-indent.nvim',
+  'https://github.com/lewis6991/gitsigns.nvim',
 })
 
 require("tokyonight").setup({
@@ -219,6 +219,11 @@ require 'treesitter-context'.setup {
 
 require("guess-indent").setup({})
 
+-- Highlight
+vim.api.nvim_set_hl(0, 'diffAdded', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'diffRemoved', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'diffChanged', { bg = 'NONE' })
+
 -- Keymap
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', '<cmd>:qall<CR>')
@@ -227,8 +232,23 @@ vim.keymap.set("n", "<F8>", "<cmd>AerialToggle!<CR>")
 vim.keymap.set('n', '<leader>s', require('fzf-lua').files)
 vim.keymap.set("n", "<leader>n", nvim_tree_toggle_custom, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gb', function()
-  vim.cmd('Git blame')
-  vim.cmd('normal i gg')
+  local cache = require('gitsigns.cache').cache
+  local bufnr = vim.api.nvim_get_current_buf()
+  local bcache = cache[bufnr]
+  if not bcache then return end
+  require('gitsigns.async').run(function()
+    if not bcache:schedule() then return end
+    local lnum = vim.api.nvim_win_get_cursor(0)[1]
+    local info = bcache:get_blame(lnum, {})
+    if not info then return end
+    local result = require('gitsigns.util').convert_blame_info(info)
+    if not result.sha or tonumber('0x' .. result.sha) == 0 then
+      vim.notify('Line is not committed yet', vim.log.levels.WARN)
+      return
+    end
+    require('gitsigns.async').schedule()
+    require('gitsigns').show_commit(result.sha, 'tabnew')
+  end)
 end)
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
