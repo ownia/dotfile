@@ -47,7 +47,10 @@ vim.pack.add({
   'https://github.com/ibhagwan/fzf-lua',
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/rachartier/tiny-inline-diagnostic.nvim',
-  'https://github.com/dhananjaylatkar/cscope_maps.nvim',
+  {
+    src = 'https://github.com/ownia/cscope_maps.nvim',
+    version = 'developer',
+  },
   'https://github.com/nvim-tree/nvim-tree.lua',
   'https://github.com/nvim-treesitter/nvim-treesitter-context',
   'https://github.com/NMAC427/guess-indent.nvim',
@@ -155,6 +158,7 @@ require('cscope_maps').setup({
   skip_input_prompt = true,
   prefix = "<C-\\>",
   cscope = {
+    exec = { "cscope", "gtags-cscope" },
     picker = "fzf-lua",
     picker_opts = {
       window_size = 10,
