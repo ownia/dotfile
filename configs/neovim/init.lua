@@ -127,6 +127,10 @@ require("fzf-lua").setup({
   'fzf-vim',
 })
 
+vim.lsp.config("*", {
+  capabilities = { textDocument = { semanticTokens = { multilineTokenSupport = true } } },
+  root_markers = { ".git" },
+})
 vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
