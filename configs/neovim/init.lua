@@ -38,6 +38,15 @@ vim.api.nvim_create_autocmd('BufRead', {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
+  pattern = { "*" },
+  callback = function()
+    if vim.opt.buftype:get() == "terminal" then
+      vim.cmd(":startinsert")
+    end
+  end
+})
+
 -- Pack
 vim.pack.add({
   'https://github.com/folke/tokyonight.nvim',
@@ -234,6 +243,7 @@ vim.api.nvim_set_hl(0, 'diffChanged', { bg = 'NONE' })
 
 -- Keymap
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 vim.keymap.set('n', '<leader>q', '<cmd>:qall<CR>')
 vim.keymap.set('n', '<leader>w', '<cmd>:wqall<CR>')
 vim.keymap.set("n", "<F8>", "<cmd>AerialToggle!<CR>")
@@ -276,3 +286,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, 'Format buffer')
   end,
 })
+vim.keymap.set('n', '<F4>', function()
+  local path = vim.fn.expand('%:p')
+  vim.fn.writefile({ path }, vim.fn.expand('~/.lastpreview.log'))
+  vim.cmd('tabnew')
+  vim.fn.termopen({ 'glow', '-p', path }, {
+    on_exit = function()
+      vim.cmd('close')
+    end,
+  })
+end)
