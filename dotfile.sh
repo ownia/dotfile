@@ -207,13 +207,22 @@ configure_linux() {
     if [ "$ARCH" = "x86_64" ] && [ -f /etc/os-release ]; then
         case "$DISTRO_ID" in
             ubuntu)
-                configure_ubuntu
+                configure_ubuntu_x86
                 ;;
             debian)
                 configure_debian
                 ;;
             arch)
                 configure_archlinux
+                ;;
+            *)
+                log_warning "Unsupported Linux distribution: $DISTRO_ID"
+                ;;
+        esac
+    elif [ "$ARCH" = "aarch64" ] && [ -f /etc/os-release ]; then
+        case "$DISTRO_ID" in
+            ubuntu)
+                configure_ubuntu_aarch64
                 ;;
             *)
                 log_warning "Unsupported Linux distribution: $DISTRO_ID"
@@ -227,8 +236,6 @@ configure_linux() {
 configure_ubuntu() {
     log_info "Configuring Ubuntu-specific settings"
 
-    create_symlink "$CONFIGS_DIR/ubuntu-x86/.bashrc" "$HOME/.bashrc" "Bash configuration"
-
     create_symlink_check "$HOME/.config/ibus/rime" "$CONFIGS_DIR/rime/default.custom.yaml" "$HOME/.config/ibus/rime/default.custom.yaml" "IBus Rime config"
     create_symlink_check "$HOME/.config/ibus/rime" "$CONFIGS_DIR/rime/luna_pinyin.custom.yaml" "$HOME/.config/ibus/rime/luna_pinyin.custom.yaml" "IBus Rime config"
 
@@ -239,6 +246,20 @@ configure_ubuntu() {
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml" "Lazygit config"
 
     create_symlink_check "$HOME/.config/glow/" "$CONFIGS_DIR/glow.yml" "$HOME/.config/glow/glow.yml" "Glow config"
+}
+
+configure_ubuntu_x86() {
+    log_info "Configuring x86 Ubuntu settings"
+
+    create_symlink "$CONFIGS_DIR/ubuntu/.bashrc-x86" "$HOME/.bashrc" "Bash configuration"
+    configure_ubuntu
+}
+
+configure_ubuntu_aarch64() {
+    log_info "Configuring arm64 Ubuntu settings"
+
+    create_symlink "$CONFIGS_DIR/ubuntu/.bashrc-arm64" "$HOME/.bashrc" "Bash configuration"
+    configure_ubuntu
 }
 
 configure_debian() {
