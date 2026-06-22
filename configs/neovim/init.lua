@@ -16,6 +16,7 @@ vim.opt.shortmess:append("I")
 vim.o.clipboard = 'unnamedplus'
 
 require('vim._core.ui2').enable({})
+vim.cmd.packadd("nvim.difftool")
 
 -- https://github.com/neovim/neovim/issues/16339#issuecomment-1457394370
 vim.api.nvim_create_autocmd('BufRead', {
@@ -156,7 +157,7 @@ vim.lsp.config('lua_ls', {
     }
   }
 })
-vim.lsp.enable({ 'lua_ls', 'pyright', 'rust_analyzer', 'clangd', 'bashls' })
+vim.lsp.enable({ 'lua_ls', 'pyright', 'ruff', 'rust_analyzer', 'clangd', 'bashls' })
 
 require('tiny-inline-diagnostic').setup({
   signs = {
