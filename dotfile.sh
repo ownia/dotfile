@@ -274,7 +274,7 @@ configure_archlinux() {
     create_symlink "$CONFIGS_DIR/archlinux/.bashrc" "$HOME/.bashrc" "Bash configuration"
 
     create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty" "$HOME/.config/ghostty/config" "Ghostty config"
-    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty_ubuntu" "$HOME/.config/ghostty/optional_config" "Ghostty Arch config"
+    create_symlink_check "$HOME/.config/ghostty/" "$CONFIGS_DIR/ghostty/.ghostty_arch" "$HOME/.config/ghostty/optional_config" "Ghostty Arch config"
 
     create_symlink "$CONFIGS_DIR/archlinux/pacman.conf" "/etc/pacman.conf" "Pacman configuration"
     create_symlink "$CONFIGS_DIR/archlinux/makepkg.conf" "/etc/makepkg.conf" "makepkg configuration"
