@@ -7,13 +7,19 @@ concrete: true
 
 layers:
   - FVP_Base_RevC-2xAEMvA-base.yaml
-  - arch/v9.5.yaml
+  - arch/v9.7.yaml
   - tfa-base.yaml
   - dt-base.yaml
   - ns-edk2-base.yaml
 
 build:
   tfa:
+    repo:
+      remote: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
+      revision: master
+    # Update this if shrinkwrap set FEATURE_DETECTION to 0 or upstream changes
+    prebuild:
+      - sed -i 's/ID_AA64PFR0_DIT, 1U, 1U,/ID_AA64PFR0_DIT, 1U, 2U,/' include/arch/aarch64/arch_features.h
     params:
       ENABLE_FEAT_MTE2: 1
       ENABLE_SVE_FOR_NS: 1
