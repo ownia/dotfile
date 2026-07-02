@@ -28,20 +28,6 @@ build:
       ENABLE_SME_FOR_SWD: 1
       ENABLE_SME2_FOR_NS: 1
 
-  acpica:
-    repo:
-      remote: https://github.com/acpica/acpica.git
-      revision: 20250807
-
-  edk2:
-    repo:
-      edk2:
-        remote: https://github.com/tianocore/edk2.git
-        revision: 8b3b2a64886f6ce6a987421668d1beb8ddff1e49
-      edk2-platforms:
-        remote: https://github.com/tianocore/edk2-platforms.git
-        revision: 17893ae84e968214ee6db15bf7502531d9034260
-
   # Patch the generated device tree to add the EL2 virtual timer (hyp-virt)
   # PPI that fvp-base-revc.dts omits. Without it, a VHE kernel running at EL2
   # warns "VHE-capable CPU without EL2 virtual timer interrupt" and falls back
