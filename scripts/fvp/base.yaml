@@ -36,6 +36,24 @@ build:
         remote: https://github.com/tianocore/edk2-platforms.git
         revision: 17893ae84e968214ee6db15bf7502531d9034260
 
+  # Patch the generated device tree to add the EL2 virtual timer (hyp-virt)
+  # PPI that fvp-base-revc.dts omits. Without it, a VHE kernel running at EL2
+  # warns "VHE-capable CPU without EL2 virtual timer interrupt" and falls back
+  # to the EL2 physical timer. This postbuild runs after dt-base.yaml builds
+  # dt_bootargs.dtb and redefines the /timer interrupts with all 5 PPIs. The
+  # overlay is applied to the decompiled DTB, so GIC_PPI/IRQ_TYPE_LEVEL_LOW
+  # macros are unavailable: use raw cells (GIC_PPI=1, IRQ_TYPE_LEVEL_LOW=8).
+  dt:
+    postbuild:
+      - DTB_FINAL=${param:builddir}/dt_bootargs.dtb
+      - >-
+          OVERLAY="/ {
+            timer {
+              interrupts = <1 13 8>, <1 14 8>, <1 11 8>, <1 10 8>, <1 12 8>;
+            };
+          };"
+      - ( dtc -q -O dts -I dtb $${DTB_FINAL} ; echo -e "$${OVERLAY}" ) | dtc -q -O dtb -o $${DTB_FINAL}
+
 run:
   params:
     -C cluster0.memory_tagging_support_level: 2
