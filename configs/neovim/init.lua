@@ -48,6 +48,13 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
   end
 })
 
+vim.api.nvim_create_autocmd ("DirChanged", {
+  pattern = "global",
+  callback = function ()
+    vim.cmd("Cs reload")
+  end
+})
+
 -- Pack
 vim.pack.add({
   'https://github.com/folke/tokyonight.nvim',
@@ -57,10 +64,7 @@ vim.pack.add({
   'https://github.com/ibhagwan/fzf-lua',
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/rachartier/tiny-inline-diagnostic.nvim',
-  {
-    src = 'https://github.com/ownia/cscope_maps.nvim',
-    version = 'developer',
-  },
+  'https://github.com/dhananjaylatkar/cscope_maps.nvim',
   'https://github.com/nvim-tree/nvim-tree.lua',
   'https://github.com/nvim-treesitter/nvim-treesitter-context',
   'https://github.com/NMAC427/guess-indent.nvim',
@@ -172,7 +176,7 @@ require('cscope_maps').setup({
   skip_input_prompt = true,
   prefix = "<C-\\>",
   cscope = {
-    exec = { "cscope", "gtags-cscope" },
+    exec = "auto",
     picker = "fzf-lua",
     picker_opts = {
       window_size = 10,
