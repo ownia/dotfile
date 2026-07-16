@@ -17,7 +17,7 @@ build:
     repo:
       remote: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
       revision: master
-    # Update this if shrinkwrap set FEATURE_DETECTION to 0 or upstream changes
+    # Update this if upstream changes
     prebuild:
       - sed -i 's/ID_AA64PFR0_DIT, 1U, 1U,/ID_AA64PFR0_DIT, 1U, 2U,/' include/arch/aarch64/arch_features.h
     params:
@@ -27,6 +27,7 @@ build:
       ENABLE_SME_FOR_NS: 1
       ENABLE_SME_FOR_SWD: 1
       ENABLE_SME2_FOR_NS: 1
+      FEATURE_DETECTION: 1
 
   # Patch the generated device tree to add the EL2 virtual timer (hyp-virt)
   # PPI that fvp-base-revc.dts omits. Without it, a VHE kernel running at EL2
