@@ -199,6 +199,8 @@ configure_macos() {
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml" "Lazygit config"
 
     create_symlink_check "$HOME/Library/Containers/app.cyan.markedit" "$CONFIGS_DIR/markedit/markedit-preview.js" "$HOME/Library/Containers/app.cyan.markedit/Data/Documents/scripts/markedit-preview.js" "MarkEdit preview"
+
+    create_symlink_check "$HOME/.config/zed/" "$CONFIGS_DIR/zed/settings.json" "$HOME/.config/zed/settings.json" "Zed config"
 }
 
 configure_linux() {
@@ -246,6 +248,8 @@ configure_ubuntu() {
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml" "Lazygit config"
 
     create_symlink_check "$HOME/.config/glow/" "$CONFIGS_DIR/glow.yml" "$HOME/.config/glow/glow.yml" "Glow config"
+
+    create_symlink_check "$HOME/.config/zed/" "$CONFIGS_DIR/zed/settings.json" "$HOME/.config/zed/settings.json" "Zed config"
 }
 
 configure_ubuntu_x86() {

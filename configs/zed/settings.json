@@ -1,0 +1,14 @@
+{
+  "ui_font_size": 15,
+  "buffer_font_size": 13,
+  "theme": "One Dark",
+  "title_bar": {
+    "show_sign_in": false,
+  },
+  "disable_ai": true,
+  "collaboration_panel": {
+    "button": false,
+  },
+  "show_whitespaces": "all",
+  "soft_wrap": "editor_width",
+}
