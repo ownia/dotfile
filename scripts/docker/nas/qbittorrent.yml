@@ -1,0 +1,19 @@
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    restart: always
+    ports:
+      - 8091:8091
+      - 16881:16881
+      - 16881:16881/udp
+    volumes:
+      - ./config:/config
+      - /volume1/media:/downloads
+      - /volume2/btrfs_media:/btrfs
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+      - WEBUI_PORT=8091
+      - TORRENTING_PORT=16881
