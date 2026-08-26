@@ -13,6 +13,20 @@ vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.shortmess:append("I")
+if vim.env.TMUX and vim.env.TMUX ~= "" then
+  vim.g.clipboard = {
+    name = "tmux",
+    copy = {
+      ["+"] = { "tmux", "load-buffer", "-w", "-" },
+      ["*"] = { "tmux", "load-buffer", "-w", "-" },
+    },
+    paste = {
+      ["+"] = { "tmux", "save-buffer", "-" },
+      ["*"] = { "tmux", "save-buffer", "-" },
+    },
+    cache_enabled = 1,
+  }
+end
 vim.o.clipboard = 'unnamedplus'
 
 require('vim._core.ui2').enable({})
@@ -69,6 +83,7 @@ vim.pack.add({
   'https://github.com/nvim-treesitter/nvim-treesitter-context',
   'https://github.com/NMAC427/guess-indent.nvim',
   'https://github.com/lewis6991/gitsigns.nvim',
+  'https://github.com/andymass/vim-matchup',
 })
 
 require("tokyonight").setup({
@@ -117,7 +132,7 @@ require("lualine").setup({
 require("nvim-treesitter").setup({
   install_dir = vim.fn.stdpath('data') .. '/site'
 })
-require('nvim-treesitter').install { "c", "cpp", "lua", "vim", "vimdoc", "python", "bash", "rust" }
+require('nvim-treesitter').install { "c", "cpp", "lua", "vim", "vimdoc", "python", "bash", "rust", "make", "cmake" }
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { '<filetype>' },
   callback = function() vim.treesitter.start() end,
@@ -225,7 +240,7 @@ local function nvim_tree_toggle_custom()
   end
 end
 
-require 'treesitter-context'.setup {
+require('treesitter-context').setup({
   enable = true,
   multiwindow = false,
   max_lines = 0,
@@ -237,9 +252,18 @@ require 'treesitter-context'.setup {
   separator = nil,
   zindex = 20,
   on_attach = nil,
-}
+})
 
 require("guess-indent").setup({})
+
+require("match-up").setup({
+  matchparen = {
+    offscreen = {
+      method = 'popup',
+      fullwidth = 1,
+    }
+  }
+})
 
 -- Highlight
 vim.api.nvim_set_hl(0, 'diffAdded', { bg = 'NONE' })
