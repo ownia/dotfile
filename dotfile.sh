@@ -174,7 +174,7 @@ config() {
     get_system_info
 
     create_symlink "$CONFIGS_DIR/vim/.vimrc" "$HOME/.vimrc" ".vimrc"
-    create_symlink "$CONFIGS_DIR/.tmux.conf" "$HOME/.tmux.conf" ".tmux.conf"
+    create_symlink "$CONFIGS_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf" ".tmux.conf"
     install_config "$CONFIGS_DIR/.ssh_config" "$HOME/.ssh/config" "ssh config"
     create_symlink "$CONFIGS_DIR/neovim/init.lua" "$HOME/.config/nvim/init.lua" "neovim config"
 
