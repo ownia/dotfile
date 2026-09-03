@@ -2,7 +2,7 @@
 font-family = "Monaco"
 font-family = "PingFang SC"
 font-family-bold = "Monaco"
-font-size = "12"
+font-size = "13"
 
 # Style
 macos-titlebar-style = transparent
