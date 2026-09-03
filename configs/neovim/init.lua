@@ -84,6 +84,7 @@ vim.pack.add({
   'https://github.com/NMAC427/guess-indent.nvim',
   'https://github.com/lewis6991/gitsigns.nvim',
   'https://github.com/andymass/vim-matchup',
+  'https://github.com/3rd/image.nvim',
 })
 
 require("tokyonight").setup({
@@ -265,6 +266,10 @@ require("match-up").setup({
   }
 })
 
+require("image").setup({
+  hijack_file_patterns = {},
+})
+
 -- Highlight
 vim.api.nvim_set_hl(0, 'diffAdded', { bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'diffRemoved', { bg = 'NONE' })
@@ -278,6 +283,7 @@ vim.keymap.set('n', '<leader>w', '<cmd>:wqall<CR>')
 vim.keymap.set("n", "<F8>", "<cmd>AerialToggle!<CR>")
 vim.keymap.set('n', '<leader>s', require('fzf-lua').files)
 vim.keymap.set("n", "<leader>n", nvim_tree_toggle_custom, { noremap = true, silent = true })
+
 vim.keymap.set('n', '<leader>gb', function()
   local cache = require('gitsigns.cache').cache
   local bufnr = vim.api.nvim_get_current_buf()
@@ -297,6 +303,7 @@ vim.keymap.set('n', '<leader>gb', function()
     require('gitsigns').show_commit(result.sha, 'tabnew')
   end)
 end)
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf
@@ -315,6 +322,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, 'Format buffer')
   end,
 })
+
 vim.keymap.set('n', '<F4>', function()
   local path = vim.fn.expand('%:p')
   vim.fn.writefile({ path }, vim.fn.expand('~/.lastpreview.log'))
@@ -325,3 +333,9 @@ vim.keymap.set('n', '<F4>', function()
     end,
   })
 end)
+
+vim.keymap.set("n", "<leader>ir", function()
+  require("image").hijack_buffer(vim.api.nvim_buf_get_name(0))
+end, {
+  desc = "Render image",
+})
