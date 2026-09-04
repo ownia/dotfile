@@ -267,6 +267,7 @@ require("match-up").setup({
 })
 
 require("image").setup({
+  scale_factor = 2.0,
   hijack_file_patterns = {},
 })
 
