@@ -1,0 +1,14 @@
+services:
+  vertex:
+    image: lswl/vertex:latest
+    container_name: vertex
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ./config:/config
+      - /volume2/vertex:/vertex
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai

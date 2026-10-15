@@ -1,0 +1,64 @@
+services:
+  moviepilot:
+    image: jxxghp/moviepilot-v3:latest
+    stdin_open: true
+    tty: true
+    container_name: moviepilot-v3
+    hostname: moviepilot-v3
+    ports:
+      - '3000:3000'
+      - '3001:3001'
+    volumes:
+      - '/volume2/moviepilot-v3/media:/media'
+      - '/volume2/moviepilot-v3/config:/config'
+      - '/volume2/moviepilot-v3/core:/moviepilot/.cloakbrowser'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/volume2/moviepilot-v3/qb:/torrents'
+    environment:
+      - 'NGINX_PORT=3000'
+      - 'PORT=3001'
+      - 'PUID=0'
+      - 'PGID=0'
+      - 'UMASK=000'
+      - 'TZ=Asia/Shanghai'
+      - 'DB_TYPE=postgresql'
+      - 'DB_POSTGRESQL_HOST=postgresql'
+      - 'DB_POSTGRESQL_PORT=5432'
+      - 'DB_POSTGRESQL_DATABASE=moviepilot'
+      - 'DB_POSTGRESQL_USERNAME=moviepilot'
+      - 'DB_POSTGRESQL_PASSWORD=pg_password'
+      - 'CACHE_BACKEND_TYPE=redis'
+      - 'CACHE_BACKEND_URL=redis://:redis_password@redis:6379'
+    restart: always
+    stop_grace_period: 120s
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  redis:
+    volumes:
+      - /volume2/docker/redis/data:/data
+    image: redis
+    command: redis-server --save 600 1 --requirepass redis_password
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgresql:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: moviepilot
+      POSTGRES_USER: moviepilot
+      POSTGRES_PASSWORD: pg_password
+    volumes:
+      - /volume2/docker/postgresql:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U moviepilot -d moviepilot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

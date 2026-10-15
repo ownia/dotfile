@@ -1,0 +1,35 @@
+services:
+  frigate:
+    container_name: frigate
+    privileged: true
+    restart: unless-stopped
+    stop_grace_period: 30s
+    image: docker.cnb.cool/frigate-cn/frigate:stable-rk # ghcr.io/blakeblackshear/frigate:stable-rk
+    shm_size: "512mb"
+    security_opt:
+      - apparmor=unconfined
+      - systempaths=unconfined
+    devices:
+      - /dev/dma_heap
+      - /dev/rga
+      - /dev/mpp_service
+      - /dev/dri
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - /volume2/frigate_storage:/media/storage
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+      - /sys/:/sys/:ro
+    ports:
+      - "8971:8971"
+      - "8554:8554"
+      - "8555:8555"
+      - "8555:8555/udp"
+    environment:
+      TZ: "Asia/Shanghai"
+      HF_ENDPOINT: "https://huggingface.mirror.frigate-cn.video"
+      GITHUB_ENDPOINT: "https://github.mirror.frigate-cn.video"
+      TF_KERAS_MOBILENET_V2_WEIGHTS_URL: https://cnb.cool/frigate-cn/mirrors/storage.googleapis/-/git/raw/main/tensorflow/keras-applications/mobilenet_v2/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_0.35_224_no_top.h5
