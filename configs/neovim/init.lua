@@ -74,7 +74,10 @@ vim.pack.add({
   'https://github.com/folke/tokyonight.nvim',
   'https://github.com/nvim-lualine/lualine.nvim',
   'https://github.com/nvim-treesitter/nvim-treesitter',
-  'https://github.com/stevearc/aerial.nvim',
+  {
+    src = 'https://github.com/ownia/aerial.nvim',
+    version = 'dev',
+  },
   'https://github.com/ibhagwan/fzf-lua',
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/rachartier/tiny-inline-diagnostic.nvim',
@@ -133,7 +136,7 @@ require("lualine").setup({
 require("nvim-treesitter").setup({
   install_dir = vim.fn.stdpath('data') .. '/site'
 })
-require('nvim-treesitter').install { "c", "cpp", "lua", "vim", "vimdoc", "python", "bash", "rust", "make", "cmake" }
+require('nvim-treesitter').install { "c", "cpp", "lua", "vim", "vimdoc", "python", "bash", "rust", "make", "cmake", "glsl" }
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { '<filetype>' },
   callback = function() vim.treesitter.start() end,
