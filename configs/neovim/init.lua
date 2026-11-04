@@ -209,6 +209,7 @@ require("nvim-tree").setup({
     width = 40,
   },
   renderer = {
+    add_trailing = true,
     icons = {
       show = {
         file = false,
