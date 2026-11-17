@@ -247,7 +247,7 @@ configure_ubuntu() {
 
     create_symlink "$CONFIGS_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml" "Lazygit config"
 
-    create_symlink_check "$HOME/.config/glow/" "$CONFIGS_DIR/glow.yml" "$HOME/.config/glow/glow.yml" "Glow config"
+    create_symlink_check "$HOME/.config/glow/" "$CONFIGS_DIR/glow/glow.yml" "$HOME/.config/glow/glow.yml" "Glow config"
 
     create_symlink_check "$HOME/.config/zed/" "$CONFIGS_DIR/zed/settings.json" "$HOME/.config/zed/settings.json" "Zed config"
 }
