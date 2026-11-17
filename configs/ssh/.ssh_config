@@ -28,8 +28,8 @@ Host cix
     ForwardX11 yes
 
 Host cix2
-    HostName 10.169.38.28
-    User root
+    HostName 10.168.140.60
+    User radxa
     ForwardX11 yes
 
 Host vm
