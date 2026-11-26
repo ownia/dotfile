@@ -137,3 +137,9 @@ export PATH=$HOME/.cargo/bin:$PATH
 # fzf
 export FZF_DEFAULT_COMMAND='fdfind --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 . "$HOME/.cargo/env"
+
+# opencode
+export PATH=/home/weiouy01/.opencode/bin:$PATH
+
+# uv cache dir
+export UV_CACHE_DIR=/data_nvme0n1/uv-cache
