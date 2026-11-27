@@ -201,6 +201,10 @@ configure_macos() {
     create_symlink_check "$HOME/Library/Containers/app.cyan.markedit" "$CONFIGS_DIR/markedit/markedit-preview.js" "$HOME/Library/Containers/app.cyan.markedit/Data/Documents/scripts/markedit-preview.js" "MarkEdit preview"
 
     create_symlink_check "$HOME/.config/zed/" "$CONFIGS_DIR/zed/settings.json" "$HOME/.config/zed/settings.json" "Zed config"
+
+    create_symlink "$CONFIGS_DIR/copilot/settings.json" "$HOME/.copilot/settings.json" "Copilot CLI config"
+
+    create_symlink "$CONFIGS_DIR/rex/init.lua" "$HOME/.config/rex/init.lua" "Rex config"
 }
 
 configure_linux() {

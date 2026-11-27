@@ -132,3 +132,9 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --e
 _fg () { fg &> /dev/null }
 zle -N _fg
 bindkey ^Z _fg
+
+# Rex
+# https://www.superlogical.com/rex/docs/automate/cli#path
+if [ -n "$REX_BIN_DIR" ]; then
+    export PATH="$REX_BIN_DIR:$PATH"
+fi
