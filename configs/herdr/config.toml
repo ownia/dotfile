@@ -1,0 +1,9 @@
+onboarding = false
+
+[keys]
+prefix = "ctrl+a"
+
+[ui]
+status_indicators = "symbols"
+sound.enabled = false
+tab_bar_position = "bottom"

@@ -256,6 +256,7 @@ configure_ubuntu_x86() {
     log_info "Configuring x86 Ubuntu settings"
 
     create_symlink "$CONFIGS_DIR/ubuntu/.bashrc-x86" "$HOME/.bashrc" "Bash configuration"
+    create_symlink "$CONFIGS_DIR/herdr/config.toml" "$HOME/.config/herdr/config.toml" "Herdr config"
     configure_ubuntu
 }
 
