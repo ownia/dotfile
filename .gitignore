@@ -1,2 +1,3 @@
 scripts/minicom/*.log
 scripts/picocom/picocom.log
+/configs/copilot/settings.json.lock

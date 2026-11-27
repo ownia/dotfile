@@ -257,6 +257,7 @@ configure_ubuntu_x86() {
 
     create_symlink "$CONFIGS_DIR/ubuntu/.bashrc-x86" "$HOME/.bashrc" "Bash configuration"
     create_symlink "$CONFIGS_DIR/herdr/config.toml" "$HOME/.config/herdr/config.toml" "Herdr config"
+    create_symlink "$CONFIGS_DIR/copilot/settings.json" "$HOME/.copilot/settings.json" "Copilot CLI config"
     configure_ubuntu
 }
 
